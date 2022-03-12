@@ -1,0 +1,91 @@
+﻿@page "/nueva-empresa"
+@inject IJSRuntime Js
+    <div  class="container-xl mt-4">
+        <RadzenCard class="mt-5 ml-1 col-lg-6 m-auto ">
+            <div class="row">
+                <div class="col">
+                    <h3>Nueva empresa</h3>
+                </div>
+            </div>
+            <EditForm Model="@empresa">
+                <DataAnnotationsValidator />
+                <div class="border-top mt-3">
+                    <div class="form-group mt-2">
+                        <label class=" mb-1">Nombre de la empresa</label>
+                        <InputText @bind-Value="empresa.Nombre" class="form-control"></InputText>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class=" mb-1">RNC</label>
+                            <InputText @bind-Value="empresa.Nombre" class="form-control"></InputText>
+                            <ValidationMessage For=@(() => empresa.Nombre) />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class=" mb-1">Telefono</label>
+                            <InputText @bind-Value="empresa.Telefono" class="form-control"></InputText>
+                            <ValidationMessage For=@(() => empresa.Telefono) />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class=" mb-1">Propietario</label>
+
+                            <RadzenDropDown AllowClear="true" TValue="dynamic" AllowVirtualization="true" class="w-100 form-control"
+                                            AllowFiltering="true" Data=@usuarios Placeholder="Seleccione el propietario..." TextProperty="NombreApellido" ValueProperty="IdUsuario"
+                                            Change=@(args => OnChange(args, "DropDown with placeholder"))/>
+                            <ValidationMessage For=@(() => empresa.IdUsuario) />
+                        </div>
+                    </div>
+                    <div class="col-1 pl-0">
+                            <a  href="usuarios" class="btn btn-success w-100" style="margin-top:26px;">+</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Direccion</label>
+                    <InputTextArea @bind-Value="empresa.Direccion" class="form-control"></InputTextArea>
+                    <ValidationMessage For=@(() => empresa.Direccion) />
+                </div>
+                <button type="submit" class="btn btn-success float-right mt-2">Guardar</button>
+            </EditForm>
+        </RadzenCard>
+    </div>
+
+    
+
+    @code {
+        Empresa empresa = new Empresa();
+        GetUsuariosServices usuariosServices = new();
+        List<Usuario> usuarios;
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            try
+            {
+                usuarios = await usuariosServices.GetUsuarios();
+            }
+            catch (Exception)
+            {
+
+                usuarios = new List<Usuario>();
+                await Js.InvokeVoidAsync("errorNotFound");
+            }
+            DateTime date = new DateTime();
+            var fecha = DateTime.Now.ToString("yyyy-MM-ddThh:mm:ssz");
+            Console.WriteLine(fecha);
+        }
+
+        void OnChange(object value, string name)
+        {
+            var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+            Console.WriteLine($"{name} value changed to {value}");
+        }
+    }

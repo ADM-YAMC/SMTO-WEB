@@ -1,0 +1,120 @@
+﻿@layout LoginLayout
+@page "/"
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+<style>
+    .content0 {
+        display: flex;
+        /*flex-direction: column;*/
+        height: 100vh;
+        margin: 0;
+    }
+
+        .content0 .content1 {
+            height: 100vh;
+            width: 50%;
+        }
+
+        .content0 .content2 {
+            height: 100vh;
+            width: 50%;
+        }
+
+    .smto {
+        font-size: 100px;
+        margin-top: 8rem;
+        color: #0D5996;
+    }
+
+    .smto-re {
+        display: none;
+    }
+
+    .content2-content {
+        margin-top: 7rem;
+    }
+
+    @@media screen and (max-width: 768px) {
+        .content1 {
+            display: none;
+        }
+
+        .content0 .content2 {
+            width: 100%;
+        }
+
+        .content2-content {
+            margin-top: 4rem;
+        }
+
+        .smto-re {
+            display: block;
+            margin-top: 1rem;
+            color: #0D5996;
+        }
+    }
+</style>
+<div class="content0">
+    <div class="content1 text-center">
+        <img class="img-fluid mt-1" src="Image/undraw_creativity_re_8grt.svg" alt="Alternate Text" />
+        <h1 class="smto">SMTO</h1>
+    </div>
+    <div class="content2">
+        <div class="col p-4 content2-content border-left">
+            <div class="col text-center mb-3">
+                <div style="width:100px; height:100px; margin:auto; ">
+                    <img src="Image/train (1).png" class="m-auto" style="z-index:30" height="100" width="100" alt="Alternate Text" />
+                </div>
+                <h1>Iniciar sesión</h1>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button style="background: #0275d8!important;" class="btn btn-primary w-100"><i class="fab fa-facebook-f"></i></button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-light w-100"><i class="fab fa-google"></i></button>
+                </div>
+            </div>
+            <EditForm Model="@dataLogin" OnValidSubmit="logout">
+                <DataAnnotationsValidator />
+                <div class="col mt-3 mb-2">
+                    <div class="form-group">
+                        <h3><i class="fas fa-user"></i> Correo</h3>
+                        <InputText style="height:40px;" type="email" @bind-Value="dataLogin.user" placeholder="Escriba el usuario o correo..." class="form-control" />
+                        <ValidationMessage For=@(() => dataLogin.user) />
+                    </div>
+                    <div class="form-group">
+                        <h3><i class="fas fa-key"></i> Contraseña</h3>
+                        <InputText style="height:40px;" type="password" @bind-Value="dataLogin.pass" placeholder="Escriba la contraseña..." class="form-control" />
+                        <ValidationMessage For=@(() => dataLogin.pass) />
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success w-100">Iniciar</button>
+                </div>
+
+            </EditForm>
+            @if (loading)
+            {
+                <Loading></Loading><div style="z-index:-1;" class="col mt-2 ">
+                    <a href="#" class="d-block">Olvide mi contraseña</a>
+                    <label>¿No tienes una cuenta? <a href="#">Registrate!</a></label>
+                    <h1 class="smto-re text-center mt-2">SMTO</h1>
+                </div>
+            }
+            else
+            {
+                <div style="z-index:1;" class="col mt-2 ">
+                    <a href="#" class="d-block">Olvide mi contraseña</a>
+                    <label>¿No tienes una cuenta? <a href="#">Registrate!</a></label>
+                    <h1 class="smto-re text-center mt-2">SMTO</h1>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

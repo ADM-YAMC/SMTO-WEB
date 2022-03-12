@@ -1,0 +1,126 @@
+﻿@*@layout UserLayout*@
+@page "/pagina-principal"
+@inject IJSRuntime Js
+
+    <style>
+        .nav-link.active {
+            border-bottom: 2px solid red !important;
+        }
+        .nav-link{
+            border-top:0px !important;
+            border-left:0px!important;
+            border-right:0px !important;
+        }
+        textarea:focus,
+        select:focus,
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="datetime"]:focus,
+        input[type="datetime-local"]:focus,
+        input[type="date"]:focus,
+        input[type="month"]:focus,
+        input[type="time"]:focus,
+        input[type="week"]:focus,
+        input[type="number"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        input[type="search"]:focus,
+        input[type="tel"]:focus,
+        input[type="color"]:focus,
+        .uneditable-input:focus {
+            border-color: rgba(126, 239, 104, 0.8)!important;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6)!important;
+            outline: 0 none;
+        }
+    </style>
+
+    
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Mis tarjetas</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Tarjetas de terceros</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row">
+                <div class="col-4">
+                    <RadzenCard class="mt-3 ml-1">
+                        <div class="text-center">
+                            <div class="m-auto">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2580/2580363.png" height="50" width="50" alt="Alternate Text" />
+                            </div>
+                            <p>965-456-7876</p>
+                            <label class="text-success">Activo</label>
+                        </div>
+
+                        <div class="border-top mt-3 border-bottom mb-3">
+                            <div class="form-group mt-2">
+                                <label class=" mb-2">Mis tarjetas</label>
+                                <select class="form-control">
+                                    <option value="value">965-456-7876</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Ultimo uso</p>
+                            <label>12-Feb-2022</label>
+                        </div>
+
+                    </RadzenCard>
+                </div>
+
+                <div class="col">
+                    <RadzenCard class="mt-3 mr-1 p-0">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-viajes-tab" data-bs-toggle="tab" data-bs-target="#viajes" type="button" role="tab" aria-controls="nav-viajes" aria-selected="true">Viajes</button>
+                                <button class="nav-link" id="nav-historial-tab" data-bs-toggle="tab" data-bs-target="#nav-historial" type="button" role="tab" aria-controls="nav-Historial" aria-selected="false">Historial</button>
+                                <button class="nav-link" id="nav-usos-tab" data-bs-toggle="tab" data-bs-target="#nav-usos" type="button" role="tab" aria-controls="nav-usos" aria-selected="false">Usos</button>
+                            </div>
+                        </nav>
+                        <div class="tab-content p-4" id="nav-tabContent">
+                            <div class="tab-pane fade show active mt-3" id="viajes" role="tabpanel" aria-labelledby="nav-viajes-tab">
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <p>Contratado</p>
+                                    </div>
+                                    <div class="col">
+                                        <a href="/Recargas" class="btn btn-primary float-right">Comprar recarga</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p style="font-size:35px;">4</p>
+                                        <label style="margin-top:0px; padding-top:0px; font-size:17px;">Viajes</label>
+                                    </div>
+                                    <div class="col">
+                                        <p style="font-size:35px;">RD$60.00</p>
+                                        <label style="margin-top:0px; padding-top:0px; font-size:17px;">Balance</label>
+                                    </div>
+                                    <div class="col">
+                                        <p style="font-size:35px;">RD$50.00</p>
+                                        <label style="margin-top:0px; padding-top:0px; font-size:17px;">Consumo</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="nav-historial" role="tabpanel" aria-labelledby="nav-historial-tab">...</div>
+                            <div class="tab-pane fade" id="nav-usos" role="tabpanel" aria-labelledby="nav-usos-tab">...</div>
+                        </div>
+
+                    </RadzenCard>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            Terceros
+        </div>
+    </div>
+
+    @code {
+
+    }

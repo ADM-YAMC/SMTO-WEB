@@ -1,0 +1,104 @@
+﻿@*@layout VentasLayout*@
+@page "/Kiosco"
+@inject IJSRuntime Js
+
+<style>
+       @@media screen and (max-width: 800px) {
+        .row{
+            display:block;
+
+        }
+        .col-4{
+            width:100%;
+        }
+        }
+</style>
+<div class="container-xl p-4">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Venta</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Reportes</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row">
+                <div class="col-lg-4">
+                    <RadzenCard class="mt-3 w-100">
+                        <div class="text-center">
+                            <div class="m-auto">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2580/2580363.png" height="50" width="50" alt="Alternate Text" />
+                            </div>
+                            <p>Banca Diamante #45</p>
+                            <label class="text-success">Activo</label>
+                        </div>
+
+                        <div class="border-top mt-3 border-bottom mb-3">
+                            <div class="form-group mt-2">
+                                <label>Total vendido hoy</label>
+                                <h1 class=" mb-2 text-success">RD$300.00</h1>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Ultima recgarga</p>
+                            <label>12-Feb-2022</label>
+                        </div>
+
+                    </RadzenCard>
+                </div>
+
+                <div class="col">
+                    <RadzenCard class="mt-3 mr-1 p-0">
+                        <div class="col mt-3">
+                            <h2 class="d-inline">Recargas</h2>
+                            <h3 style="float:right;" class="d-inline text-right">Ilimitado</h3>
+                        </div>
+                        <hr class="mb-0" />
+                        <div class="col p-4">
+                            <div class="form-group">
+                                <h3>No. tarjeta</h3>
+                                <input type="number" placeholder="Escriba el numero de la tarjeta..." name="tarjeta" class="form-control" />
+                            </div>
+                            <div class="form-group mb-2">
+                                <h3>Recargar</h3>
+                                <RadzenRadioButtonList @bind-Value=@value TValue="int">
+                                    <Items>
+                                        <RadzenRadioButtonListItem Text="Viajes" Value="1" />
+                                        <RadzenRadioButtonListItem Text="Balance" Value="2" />
+                                    </Items>
+                                </RadzenRadioButtonList>
+                            </div>
+                            @if (value == 1)
+                            {
+
+                                <div class="mb-1">
+                                    <div class="form-group">
+                                        <h3>Cantidad</h3>
+                                        <input type="number" style="font-size:25px; height:50px" class="form-control">
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <h3>Monto</h3>
+                                    <input type="number" style="font-size:25px; height:50px;" class="form-control">
+                                </div>
+                                <p class="mt-1">El monto mínimo de recarga es de RD$20.00 y el máximo de RD$2,000.00</p>
+                            }
+                        </div>
+
+                    </RadzenCard>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            Reortes
+        </div>
+    </div>
+</div>
+  
+    @code {
+        int value = 1;
+    }

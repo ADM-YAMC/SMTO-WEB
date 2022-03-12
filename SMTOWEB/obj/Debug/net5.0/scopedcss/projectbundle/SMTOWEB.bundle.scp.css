@@ -1,0 +1,499 @@
+@import '';
+
+/* /Pages/global/Pagos.razor.rz.scp.css */
+
+body[b-82537f43tq] {
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 100vh;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    font-family: 'Raleway';
+}
+
+.payment-title[b-82537f43tq] {
+    width: 100%;
+    text-align: center;
+}
+
+.form-container .field-container:first-of-type[b-82537f43tq] {
+    grid-area: name;
+}
+
+.form-container .field-container:nth-of-type(2)[b-82537f43tq] {
+    grid-area: number;
+}
+
+.form-container .field-container:nth-of-type(3)[b-82537f43tq] {
+    grid-area: expiration;
+}
+
+.form-container .field-container:nth-of-type(4)[b-82537f43tq] {
+    grid-area: security;
+}
+
+.field-container input[b-82537f43tq] {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.field-container[b-82537f43tq] {
+    position: relative;
+}
+
+.form-container[b-82537f43tq] {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: auto auto;
+    grid-template-rows: 90px 90px 90px;
+    grid-template-areas: "name name""number number""expiration security";
+    max-width: 400px;
+    padding: 20px;
+    color: #707070;
+}
+
+label[b-82537f43tq] {
+    padding-bottom: 5px;
+    font-size: 13px;
+}
+
+input[b-82537f43tq] {
+    margin-top: 3px;
+    padding: 15px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #dcdcdc;
+}
+
+.ccicon[b-82537f43tq] {
+    height: 38px;
+    position: absolute;
+    right: 6px;
+    top: calc(50% - 17px);
+    width: 60px;
+}
+
+/* CREDIT CARD IMAGE STYLING */
+.preload *[b-82537f43tq] {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+}
+
+.container[b-82537f43tq] {
+    width: 100%;
+    max-width: 400px;
+    max-height: 251px;
+    height: 54vw;
+    padding: 20px;
+}
+
+#ccsingle[b-82537f43tq] {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+}
+
+    #ccsingle svg[b-82537f43tq] {
+        width: 100px;
+        max-height: 60px;
+    }
+
+.creditcard svg#cardfront[b-82537f43tq],
+.creditcard svg#cardback[b-82537f43tq] {
+    width: 100%;
+    -webkit-box-shadow: 1px 5px 6px 0px black;
+    box-shadow: 1px 5px 6px 0px black;
+    border-radius: 22px;
+}
+
+#generatecard[b-82537f43tq] {
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    color: #fff;
+    padding: 2px 4px;
+    background-color: #909090;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+/* CHANGEABLE CARD ELEMENTS */
+.creditcard .lightcolor[b-82537f43tq],
+.creditcard .darkcolor[b-82537f43tq] {
+    -webkit-transition: fill .5s;
+    transition: fill .5s;
+}
+
+.creditcard .lightblue[b-82537f43tq] {
+    fill: #03A9F4;
+}
+
+.creditcard .lightbluedark[b-82537f43tq] {
+    fill: #0288D1;
+}
+
+.creditcard .red[b-82537f43tq] {
+    fill: #ef5350;
+}
+
+.creditcard .reddark[b-82537f43tq] {
+    fill: #d32f2f;
+}
+
+.creditcard .purple[b-82537f43tq] {
+    fill: #ab47bc;
+}
+
+.creditcard .purpledark[b-82537f43tq] {
+    fill: #7b1fa2;
+}
+
+.creditcard .cyan[b-82537f43tq] {
+    fill: #26c6da;
+}
+
+.creditcard .cyandark[b-82537f43tq] {
+    fill: #0097a7;
+}
+
+.creditcard .green[b-82537f43tq] {
+    fill: #66bb6a;
+}
+
+.creditcard .greendark[b-82537f43tq] {
+    fill: #388e3c;
+}
+
+.creditcard .lime[b-82537f43tq] {
+    fill: #d4e157;
+}
+
+.creditcard .limedark[b-82537f43tq] {
+    fill: #afb42b;
+}
+
+.creditcard .yellow[b-82537f43tq] {
+    fill: #ffeb3b;
+}
+
+.creditcard .yellowdark[b-82537f43tq] {
+    fill: #f9a825;
+}
+
+.creditcard .orange[b-82537f43tq] {
+    fill: #ff9800;
+}
+
+.creditcard .orangedark[b-82537f43tq] {
+    fill: #ef6c00;
+}
+
+.creditcard .grey[b-82537f43tq] {
+    fill: #bdbdbd;
+}
+
+.creditcard .greydark[b-82537f43tq] {
+    fill: #616161;
+}
+
+/* FRONT OF CARD */
+#svgname[b-82537f43tq] {
+    text-transform: uppercase;
+}
+
+#cardfront .st2[b-82537f43tq] {
+    fill: #FFFFFF;
+}
+
+#cardfront .st3[b-82537f43tq] {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+}
+
+#cardfront .st4[b-82537f43tq] {
+    font-size: 54.7817px;
+}
+
+#cardfront .st5[b-82537f43tq] {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+}
+
+#cardfront .st6[b-82537f43tq] {
+    font-size: 33.1112px;
+}
+
+#cardfront .st7[b-82537f43tq] {
+    opacity: 0.6;
+    fill: #FFFFFF;
+}
+
+#cardfront .st8[b-82537f43tq] {
+    font-size: 24px;
+}
+
+#cardfront .st9[b-82537f43tq] {
+    font-size: 36.5498px;
+}
+
+#cardfront .st10[b-82537f43tq] {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+}
+
+#cardfront .st11[b-82537f43tq] {
+    font-size: 16.1716px;
+}
+
+#cardfront .st12[b-82537f43tq] {
+    fill: #4C4C4C;
+}
+
+/* BACK OF CARD */
+#cardback .st0[b-82537f43tq] {
+    fill: none;
+    stroke: #0F0F0F;
+    stroke-miterlimit: 10;
+}
+
+#cardback .st2[b-82537f43tq] {
+    fill: #111111;
+}
+
+#cardback .st3[b-82537f43tq] {
+    fill: #F2F2F2;
+}
+
+#cardback .st4[b-82537f43tq] {
+    fill: #D8D2DB;
+}
+
+#cardback .st5[b-82537f43tq] {
+    fill: #C4C4C4;
+}
+
+#cardback .st6[b-82537f43tq] {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+}
+
+#cardback .st7[b-82537f43tq] {
+    font-size: 27px;
+}
+
+#cardback .st8[b-82537f43tq] {
+    opacity: 0.6;
+}
+
+#cardback .st9[b-82537f43tq] {
+    fill: #FFFFFF;
+}
+
+#cardback .st10[b-82537f43tq] {
+    font-size: 24px;
+}
+
+#cardback .st11[b-82537f43tq] {
+    fill: #EAEAEA;
+}
+
+#cardback .st12[b-82537f43tq] {
+    font-family: 'Rock Salt', cursive;
+}
+
+#cardback .st13[b-82537f43tq] {
+    font-size: 37.769px;
+}
+
+/* FLIP ANIMATION */
+.container[b-82537f43tq] {
+    perspective: 1000px;
+}
+
+.creditcard[b-82537f43tq] {
+    width: 100%;
+    max-width: 400px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition: -webkit-transform 0.6s;
+    -webkit-transition: -webkit-transform 0.6s;
+    transition: transform 0.6s;
+    transition: transform 0.6s, -webkit-transform 0.6s;
+    cursor: pointer;
+}
+
+    .creditcard .front[b-82537f43tq],
+    .creditcard .back[b-82537f43tq] {
+        position: absolute;
+        width: 100%;
+        max-width: 400px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        color: #47525d;
+    }
+
+    .creditcard .back[b-82537f43tq] {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    .creditcard.flipped[b-82537f43tq] {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+/* /Pages/UsuariosMTO/Recargas.razor.rz.scp.css */
+/* /Shared/MainLayout.razor.rz.scp.css */
+.page[b-v80gz334n1] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.main[b-v80gz334n1] {
+    flex: 1;
+}
+
+.sidebar[b-v80gz334n1] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-v80gz334n1] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-v80gz334n1]  a, .top-row .btn-link[b-v80gz334n1] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-v80gz334n1] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-v80gz334n1] {
+        display: none;
+    }
+
+    .top-row.auth[b-v80gz334n1] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-v80gz334n1], .top-row .btn-link[b-v80gz334n1] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-v80gz334n1] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-v80gz334n1] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-v80gz334n1] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .main > div[b-v80gz334n1] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* /Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-v0omgv58w6] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-v0omgv58w6] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-v0omgv58w6] {
+    font-size: 1.1rem;
+}
+
+.oi[b-v0omgv58w6] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-v0omgv58w6] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-v0omgv58w6] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-v0omgv58w6] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-v0omgv58w6]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-v0omgv58w6]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-v0omgv58w6]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.rz-navigation-item-wrapper-active[b-v0omgv58w6]:before {
+    background-color: #00ff21 !important;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-v0omgv58w6] {
+        display: none;
+    }
+
+    .collapse[b-v0omgv58w6] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}

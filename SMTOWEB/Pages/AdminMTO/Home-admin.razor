@@ -1,0 +1,143 @@
+﻿@page "/index"
+@inject IJSRuntime Js
+
+
+
+<style>
+    h1{
+        display:inline !important;
+    }
+</style>
+
+<div class="container-xl">
+
+    <div class="row mb-3 mt-4">
+        <div class="col mb-3">
+            <RadzenCard style="border-left: 3px solid #006797">
+                <h1>23 <span class="text-danger" style="font-size:20px;"><i class="fas fa-arrow-alt-circle-down"></i></span></h1>
+                <label>Empresas actuales</label>
+            </RadzenCard>
+        </div>
+        <div class="col mb-3">
+            <RadzenCard style="border-left: 3px solid #006797">
+                <h1 class="d-inline mr-2">2,322 <span class="text-success" style="font-size:20px;"><i class="fas fa-arrow-alt-circle-up"></i></span></h1>
+                <label>Boletos vendidos</label>
+            </RadzenCard>
+        </div>
+        <div class="col mb-3">
+            <RadzenCard style="border-left: 3px solid #006797">
+                <h1 class="d-inline mr-2">RD$100,000.00 <span class="text-success" style="font-size:20px;"><i class="fas fa-arrow-alt-circle-up"></i></span></h1>
+                <label>Recaudado hoy</label>
+            </RadzenCard>
+        </div>
+    </div>
+
+
+    @if (empresaUsers != null)
+    {
+        <RadzenCard class="ml-0 mr-0 mt-3 mb-3">
+            <div class="row mb-3">
+                <div class="col">
+                    <h2>Empresas</h2>
+                </div>
+                <div class="col">
+                    <a href="nueva-empresa" class="btn btn-primary float-right">Nueva empresa</a>
+                </div>
+            </div>
+            <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Justify" ShowPagingSummary="true"
+                            Data="@empresaUsers" @ref="empresasGrid" TItem="EmpresaUser" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
+                <Columns>
+                    <RadzenDataGridColumn TItem="EmpresaUser" Property="RCN" Title="RCN" Width="200px" />
+                    <RadzenDataGridColumn TItem="EmpresaUser" Property="Nombre" Title="Nombre" Width="140px" />
+                    <RadzenDataGridColumn TItem="EmpresaUser" Property="Nombre_dueño" Title="Dueño" Width="140px" />
+                    <RadzenDataGridColumn TItem="EmpresaUser" Property="Telefono" Title="Telefono" Width="140px" />
+                    <RadzenDataGridColumn TItem="EmpresaUser" Property="Direccion" Title="Direccion" Width="140px" />
+                    <RadzenDataGridColumn TItem="EmpresaUser" Context="empresa" Title="Opciones" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="60px">
+                        <Template Context="empresa">
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(empresa))" @onclick:stopPropagation="true">
+                            </RadzenButton>
+                        </Template>
+                        <EditTemplate Context="empresa">
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(empresa))">
+                            </RadzenButton>
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenCard>
+    }
+</div>
+
+    @code {
+        RadzenDataGrid<EmpresaUser> empresasGrid;
+
+        async Task DeleteRow(EmpresaUser empresa)
+        {
+            empresaUsers.Remove(empresa);
+            await empresasGrid.Reload();
+        }
+
+        List<EmpresaUser> empresaUsers;
+        //{
+        //    new EmpresaUser()
+        //    {
+        //        RCN = "1121213930",
+        //        Nombre = "Consorcio bancas Diamante",
+        //        Nombre_dueño = "Yunior moreta",
+        //        Telefono = "000-000-0000",
+        //        Direccion = "Santo domingo"
+        //    },
+        //    new EmpresaUser()
+        //    {
+        //        RCN = "3237773730",
+        //        Nombre = "Super colmado santos",
+        //        Nombre_dueño = "Yunior moreta",
+        //        Telefono = "000-000-0000",
+        //        Direccion = "Santo domingo"
+        //    },
+        //    new EmpresaUser()
+        //    {
+        //        RCN = "283283238384",
+        //        Nombre = "Disashop",
+        //        Nombre_dueño = "Yunior moreta",
+        //        Telefono = "000-000-0000",
+        //        Direccion = "Santo domingo"
+        //    },
+        //    new EmpresaUser()
+        //    {
+        //        RCN = "938283823238",
+        //        Nombre = "Total",
+        //        Nombre_dueño = "Yunior moreta",
+        //        Telefono = "000-000-0000",
+        //        Direccion = "Santo domingo"
+        //    },
+        //    new EmpresaUser()
+        //    {
+        //        RCN = "92939293293",
+        //        Nombre = "Consorcio bancas llueve",
+        //        Nombre_dueño = "Yunior moreta",
+        //        Telefono = "000-000-0000",
+        //        Direccion = "Santo domingo"
+        //    },
+        //    new EmpresaUser()
+        //    {
+        //        RCN = "388232923223",
+        //        Nombre = "Consorcio bancas la fortuna",
+        //        Nombre_dueño = "Yunior moreta",
+        //        Telefono = "000-000-0000",
+        //        Direccion = "Santo domingo"
+        //    }
+        //};
+
+
+
+
+        public class EmpresaUser
+        {
+            public string RCN { get; set; }
+            public string Nombre { get; set; }
+            public string Nombre_dueño { get; set; }
+            public string Telefono { get; set; }
+            public string Direccion { get; set; }
+        }
+    }

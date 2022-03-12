@@ -1,0 +1,84 @@
+﻿@inject IJSRuntime Js
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@using Newtonsoft.Json
+<style>
+    .cursor {
+        cursor: pointer;
+    }
+    /*.rz-navigation-item-link {
+        background: #1c57b9 !important;
+    }*/
+</style>
+<nav class="navbar navbar-light" style="background: #1c57b9; color: azure; z-index: 10; position: sticky; top: 0;">
+    <div class="row w-100">
+        <div class="col ml-0 pl-0">
+            <div class="container-fluid">
+                <a class="navbar-brand">
+                    <span class="mr-2" @onclick="Open" role="button">
+                        <i class="fas fa-bars fa-1x"></i>
+                    </span>
+                    <img src="Image/train (1).png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                    SMTO
+                </a>
+            </div>
+        </div>
+        <div class="col float-right pr-0">
+            <RadzenProfileMenu Style="background-color:transparent!important; float:right; border:0px!important; padding:0px;">
+                <Template>
+                    @if (user != null)
+                    {
+                        <span class="mr-2 cursor">@user.nombreApellido</span>
+                    }
+                    else
+                    {
+                        <span class="mr-2 cursor">...</span>
+                    }
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="40" height="40" class="rounded-circle cursor" />
+                </Template>
+                <ChildContent>
+                    <RadzenProfileMenuItem Text="Buttons" Path="buttons" Icon="account_circle"></RadzenProfileMenuItem>
+                    <RadzenProfileMenuItem Text="Menu" Path="menu" Icon="line_weight"></RadzenProfileMenuItem>
+                    <RadzenProfileMenuItem Text="FileInput" Path="fileinput" Icon="attach_file"></RadzenProfileMenuItem>
+                    <RadzenProfileMenuItem Text="Dialog" Path="dialog" Icon="perm_media"></RadzenProfileMenuItem>
+                    <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenProfileMenuItem>
+                </ChildContent>
+            </RadzenProfileMenu>
+        </div>
+    </div>
+</nav>
+
+@code{
+    UserTemp user = new UserTemp();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            try
+            {
+
+                var storage = await Js.InvokeAsync<string>("Session");
+                user = JsonConvert.DeserializeObject<UserTemp>(storage);
+                StateHasChanged();
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Error");
+            }
+        }
+    }
+    public bool cierre { get; set; } = false;
+    async Task Open()
+    {
+        cierre = !cierre;
+        if (cierre)
+        {
+            await Js.InvokeVoidAsync("openNav");
+        }
+        else
+        {
+            await Js.InvokeVoidAsync("closeNav");
+        }
+    }
+}

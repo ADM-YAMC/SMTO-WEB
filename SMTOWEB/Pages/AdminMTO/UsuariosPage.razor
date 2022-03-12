@@ -1,0 +1,54 @@
+﻿@page "/usuarios"
+@inject HttpClient http
+
+<div class="container-xl pl-5 pt-5">
+    @if (usuarios != null)
+    {
+    <RadzenCard>
+        <div class="row mb-3">
+            <div class="col">
+                <h2>Empresas</h2>
+            </div>
+            <div class="col">
+                <a href="nuevo-usuario" class="btn btn-primary float-right">Nuevo usuario</a>
+            </div>
+        </div>
+        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Justify" ShowPagingSummary="true"
+                        Data="@usuarios" TItem="Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
+            <Columns>
+                <RadzenDataGridColumn TItem="Usuario" Property="Cedula" Title="Cedula" Width="200px" />
+                <RadzenDataGridColumn TItem="Usuario" Property="NombreApellido" Title="Nombre" Width="140px" />
+                <RadzenDataGridColumn TItem="Usuario" Property="Telefono" Title="Telefono" Width="140px" />
+                <RadzenDataGridColumn TItem="Usuario" Property="NombreUsuario" Title="Correo" Width="140px" />
+                <RadzenDataGridColumn TItem="Usuario" Property="Rol" Title="Rol" Width="140px" />
+                @*<RadzenDataGridColumn TItem="Usuario" Context="empresa" Title="Opciones" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="60px">
+                    <Template Context="empresa">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(empresa))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                    <EditTemplate Context="empresa">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(empresa))">
+                        </RadzenButton>
+                    </EditTemplate>
+                </RadzenDataGridColumn>*@
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenCard>
+    }
+    else
+    {
+        <h5>Cargando usuarios...</h5>
+    }
+</div>
+
+@code {
+
+    GetUsuariosServices usuariosServices = new();
+    List<Usuario> usuarios;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        usuarios = await usuariosServices.GetUsuarios();
+    }
+}
