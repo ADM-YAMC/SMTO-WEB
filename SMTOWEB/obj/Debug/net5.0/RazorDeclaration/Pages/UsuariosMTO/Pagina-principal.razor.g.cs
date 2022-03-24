@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace SMTOWEB.Pages.global
+namespace SMTOWEB.Pages.UsuariosMTO
 {
     #line hidden
     using System;
@@ -118,6 +118,13 @@ using SMTOWEB.Servicios;
 #line hidden
 #nullable disable
 #nullable restore
+#line 17 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using Newtonsoft.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 18 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
 using SMTOWEB.Pages.global;
 
@@ -139,56 +146,29 @@ using Microsoft.AspNetCore.Authorization;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\global\AddUserGlobalPage.razor"
-using Newtonsoft.Json;
+#line 21 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using SMTOWEB.Data;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/nuevo-usuario")]
-    public partial class AddUserGlobalPage : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 22 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using CurrieTechnologies.Razor.SweetAlert2;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/pagina-principal")]
+    public partial class Pagina_principal : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 61 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\global\AddUserGlobalPage.razor"
-       
-    Usuario usuario = new Usuario();
-    private Response respuesta;
-
-    async Task PostUser()
-    {
-        DateTime fecha = new DateTime();
-        usuario.FechaCreacion = fecha.ToString();
-        usuario.Contraseña = "12345678";
-        string json = JsonConvert.SerializeObject(usuario);
-        StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        var responses = await Http.PostAsync("https://localhost:44391/api/Usuarios", httpContent);
-        respuesta = await responses.Content.ReadFromJsonAsync<Response>();
-        if (respuesta.ok)
-        {
-            usuario = new Usuario();
-            await Js.InvokeVoidAsync("success");
-        }
-        else
-        {
-            await Js.InvokeVoidAsync("error");
-        }
-    }
-
-    public class Response
-    {
-        public bool ok { get; set; }
-    }
-
-#line default
-#line hidden
-#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient http { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime Js { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.SessionStorage.ISessionStorageService sessionStorage { get; set; }
     }
 }

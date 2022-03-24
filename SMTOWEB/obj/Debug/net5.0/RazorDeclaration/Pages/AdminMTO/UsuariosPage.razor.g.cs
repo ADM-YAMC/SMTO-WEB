@@ -118,13 +118,6 @@ using SMTOWEB.Servicios;
 #line hidden
 #nullable disable
 #nullable restore
-#line 17 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
-using Newtonsoft.Json;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 18 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
 using SMTOWEB.Pages.global;
 
@@ -145,6 +138,27 @@ using Microsoft.AspNetCore.Authorization;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 21 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using SMTOWEB.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 22 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using CurrieTechnologies.Razor.SweetAlert2;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\AdminMTO\UsuariosPage.razor"
+using Newtonsoft.Json;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/usuarios")]
     public partial class UsuariosPage : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -154,21 +168,63 @@ using Microsoft.AspNetCore.Authorization;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 44 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\AdminMTO\UsuariosPage.razor"
+#line 52 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\AdminMTO\UsuariosPage.razor"
        
-
+    RadzenDataGrid<Usuario> RadzenGrid;
     GetUsuariosServices usuariosServices = new();
     List<Usuario> usuarios;
-
+    UserTemp user = new UserTemp();
+    GetDataUserLoginSessioStorage getData = new GetDataUserLoginSessioStorage();
 
     protected override async Task OnInitializedAsync()
     {
+
         usuarios = await usuariosServices.GetUsuarios();
+        user = await getData.GetDataLogin();
+
+        StateHasChanged();
+    }
+
+    async Task DeleteRow(Usuario usuario)
+    {
+        usuarios.Remove(usuario);
+
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Delete,
+            RequestUri = new Uri($"https://localhost:44391/api/Usuarios/{usuario.IdUsuario}"),
+            Content = new StringContent("application/json")
+        };
+
+        var response = await http.SendAsync(request);
+        var respuesta = await response.Content.ReadFromJsonAsync<Response>();
+        if (respuesta.ok)
+        {
+            await Js.InvokeVoidAsync("successDeleted", respuesta.mensaje);
+        }
+        await RadzenGrid.Reload();
+
+    }
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+
+    //    if (firstRender)
+    //    {
+
+    //    }
+    //}
+
+    public class Response
+    {
+        public bool ok { get; set; }
+        public string mensaje { get; set; }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime Js { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient http { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.SessionStorage.ISessionStorageService sessionStorage { get; set; }
     }

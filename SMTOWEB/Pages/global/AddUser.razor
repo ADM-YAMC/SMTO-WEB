@@ -1,0 +1,76 @@
+﻿
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IJSRuntime Js
+@inject SweetAlertService Swal
+<RadzenCard class="mt-5 ml-1 col-lg-6 m-auto ">
+    <div class="row">
+        <div class="col">
+
+            <h2>@(user != null ? "Nuevo usuario" : "Registrarme")</h2>
+        </div>
+    </div>
+    <EditForm Model="@usuario" OnValidSubmit="PostUser">
+        <DataAnnotationsValidator />
+        <div class="border-top mt-3">
+            <div class="form-group">
+                <label class=" mb-1">Cedula</label>
+                <InputText @bind-Value="usuario.Cedula" class="form-control"></InputText>
+                <ValidationMessage For=@(() => usuario.Cedula) />
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <label class=" mb-1">Nombre y apellido</label>
+            <InputText @bind-Value="usuario.NombreApellido" class="form-control"></InputText>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label class=" mb-1">Telefono</label>
+                    <InputText @bind-Value="usuario.Telefono" class="form-control"></InputText>
+                    <ValidationMessage For=@(() => usuario.Telefono) />
+                </div>
+            </div>
+            <div class="col">
+                @if (user != null)
+                {
+                    <div class="form-group">
+                        <label class=" mb-1">Rol</label>
+                        <InputSelect @bind-Value="@usuario.Rol" class="form-control">
+                            <option value="" selected disabled>Seleccione un rol</option>
+                            <option value="1">Administrador general</option>
+                            <option value="2">Administrador de sucursal</option>
+                            <option value="3">Vendedor</option>
+                            <option value="4">Usuario</option>
+                        </InputSelect>
+                        <ValidationMessage For=@(() => usuario.Rol) />
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label class=" mb-1">Correo</label>
+                        <InputText @bind-Value="usuario.NombreUsuario" class="form-control"></InputText>
+                        <ValidationMessage For=@(() => usuario.NombreUsuario) />
+                    </div>
+                }
+            </div>
+        </div>
+
+        @if (user != null)
+        {
+            <div class="form-group">
+                <label class=" mb-1">Correo</label>
+                <InputText @bind-Value="usuario.NombreUsuario" class="form-control"></InputText>
+                <ValidationMessage For=@(() => usuario.NombreUsuario) />
+            </div>
+        }
+
+        <div class="form-group">
+            <label>Direccion</label>
+            <InputTextArea @bind-Value="usuario.Direccion" class="form-control"></InputTextArea>
+            <ValidationMessage For=@(() => usuario.Direccion) />
+        </div>
+        <button type="submit" class="btn btn-success float-right mt-2">Guardar</button>
+    </EditForm>
+</RadzenCard>

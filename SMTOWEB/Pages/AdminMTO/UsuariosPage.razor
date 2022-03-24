@@ -1,36 +1,44 @@
 ﻿@page "/usuarios"
 @inject HttpClient http
-
+@using Newtonsoft.Json
+@inject IJSRuntime Js
 <div class="container-xl pl-5 pt-5">
     @if (usuarios != null)
     {
     <RadzenCard>
         <div class="row mb-3">
             <div class="col">
-                <h2>Empresas</h2>
+                <h2>Usuarios</h2>
             </div>
             <div class="col">
                 <a href="nuevo-usuario" class="btn btn-primary float-right">Nuevo usuario</a>
             </div>
         </div>
         <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Justify" ShowPagingSummary="true"
-                        Data="@usuarios" TItem="Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
+                        Data="@usuarios" @ref="RadzenGrid" TItem="Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
             <Columns>
                 <RadzenDataGridColumn TItem="Usuario" Property="Cedula" Title="Cedula" Width="200px" />
                 <RadzenDataGridColumn TItem="Usuario" Property="NombreApellido" Title="Nombre" Width="140px" />
                 <RadzenDataGridColumn TItem="Usuario" Property="Telefono" Title="Telefono" Width="140px" />
                 <RadzenDataGridColumn TItem="Usuario" Property="NombreUsuario" Title="Correo" Width="140px" />
-                <RadzenDataGridColumn TItem="Usuario" Property="Rol" Title="Rol" Width="140px" />
-                @*<RadzenDataGridColumn TItem="Usuario" Context="empresa" Title="Opciones" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="60px">
-                    <Template Context="empresa">
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(empresa))" @onclick:stopPropagation="true">
+                <RadzenDataGridColumn TItem="Usuario" Property="Rol" Title="Rol" Width="140px">
+                    <Template Context="usuario">
+                        @if (usuario.Rol == "1")
+                        {
+                            <span>Usuario</span>
+                        }
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Usuario" Context="usuario" Title="Opciones" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="60px">
+                    <Template Context="usuario">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(usuario))" @onclick:stopPropagation="true">
                         </RadzenButton>
                     </Template>
-                    <EditTemplate Context="empresa">
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(empresa))">
+                    <EditTemplate Context="usuario">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Class="m-1" Click="@(args => DeleteRow(usuario))">
                         </RadzenButton>
                     </EditTemplate>
-                </RadzenDataGridColumn>*@
+                </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>
     </RadzenCard>
@@ -42,13 +50,54 @@
 </div>
 
 @code {
-
+    RadzenDataGrid<Usuario> RadzenGrid;
     GetUsuariosServices usuariosServices = new();
     List<Usuario> usuarios;
-
+    UserTemp user = new UserTemp();
+    GetDataUserLoginSessioStorage getData = new GetDataUserLoginSessioStorage();
 
     protected override async Task OnInitializedAsync()
     {
+
         usuarios = await usuariosServices.GetUsuarios();
+        user = await getData.GetDataLogin();
+
+        StateHasChanged();
+    }
+
+    async Task DeleteRow(Usuario usuario)
+    {
+        usuarios.Remove(usuario);
+
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Delete,
+            RequestUri = new Uri($"https://localhost:44391/api/Usuarios/{usuario.IdUsuario}"),
+            Content = new StringContent("application/json")
+        };
+
+        var response = await http.SendAsync(request);
+        var respuesta = await response.Content.ReadFromJsonAsync<Response>();
+        if (respuesta.ok)
+        {
+            await Js.InvokeVoidAsync("successDeleted", respuesta.mensaje);
+        }
+        await RadzenGrid.Reload();
+
+    }
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+
+    //    if (firstRender)
+    //    {
+
+    //    }
+    //}
+
+    public class Response
+    {
+        public bool ok { get; set; }
+        public string mensaje { get; set; }
     }
 }

@@ -145,8 +145,21 @@ using Microsoft.AspNetCore.Authorization;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(UserLayout))]
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Recargas")]
+#nullable restore
+#line 21 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using SMTOWEB.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 22 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using CurrieTechnologies.Razor.SweetAlert2;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/pagina-principal/recargas")]
     public partial class Recargas : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -155,7 +168,7 @@ using Microsoft.AspNetCore.Authorization;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 209 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\UsuariosMTO\Recargas.razor"
+#line 217 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\UsuariosMTO\Recargas.razor"
        
     int value = 1;
     Modelo.Recargas recargas = new Modelo.Recargas();
@@ -188,6 +201,18 @@ using Microsoft.AspNetCore.Authorization;
         else
         {
             msj = "";
+        }
+    }
+
+    void Changed(ChangeEventArgs args)
+    {
+        
+        if (value == 1)
+        {
+            recargas.Viajes = null;
+        }
+        else {
+            recargas.Balance = 0;
         }
     }
 

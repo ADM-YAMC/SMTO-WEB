@@ -409,7 +409,6 @@ C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\SMTOWEB.MvcAppli
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\SMTOWEB.RazorComponent.input.cache
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\AdminMTO\Home-admin.razor.g.cs
-C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\UsuariosMTO\Home-usuario.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\VendedoresMTO\Home-ventas.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Shared\UserLayout.razor.g.cs
@@ -426,7 +425,6 @@ C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\SMTOWEB.TagHelpe
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\SMTOWEB.RazorCoreGenerate.cache
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\App.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\Home-admin.razor.g.cs
-C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\UsuariosMTO\Home-usuario.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\VendedoresMTO\Home-ventas.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Shared\UserLayout.razor.g.cs
@@ -653,13 +651,9 @@ C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\Puntos.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\AdminMTO\EmpresasPage.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\EmpresasPage.razor.g.cs
-C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\global\AddUserGlobalPage.razor.g.cs
-C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\global\AddUserGlobalPage.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\Newtonsoft.Json.dll.gz
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\Newtonsoft.Json.dll
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\build-gz\nC6A+447.gz
-C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\AdminMTO\UsuariosPage.razor.g.cs
-C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\UsuariosPage.razor.g.cs
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\Blazored.SessionStorage.dll.gz
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\Blazored.SessionStorage.dll
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\build-gz\tAOgOgTO.gz
@@ -671,3 +665,16 @@ C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\build-gz\32MhXUK
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\build-gz\yRq+Xd6Q.gz
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\build-gz\XG0nRK5x.gz
 C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\build-gz\iyHuaFhY.gz
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\UsuariosMTO\Pagina-principal.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\UsuariosMTO\Pagina-principal.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\AdminMTO\UsuariosPage.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\UsuariosPage.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\AdminMTO\Registro-usuario.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\global\AddUser.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\Login\Registro-usuario.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\Registro-usuario.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\global\AddUser.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\Login\Registro-usuario.razor.g.cs
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\CurrieTechnologies.Razor.SweetAlert2.dll.gz
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\CurrieTechnologies.Razor.SweetAlert2.dll
+C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\obj\Debug\net5.0\build-gz\ku+uSEo6.gz

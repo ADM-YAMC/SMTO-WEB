@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace SMTOWEB.Pages.UsuariosMTO
+namespace SMTOWEB.Pages.AdminMTO
 {
     #line hidden
     using System;
@@ -118,13 +118,6 @@ using SMTOWEB.Servicios;
 #line hidden
 #nullable disable
 #nullable restore
-#line 17 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
-using Newtonsoft.Json;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 18 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
 using SMTOWEB.Pages.global;
 
@@ -145,8 +138,29 @@ using Microsoft.AspNetCore.Authorization;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/pagina-principal")]
-    public partial class Home_usuario : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 21 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using SMTOWEB.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 22 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using CurrieTechnologies.Razor.SweetAlert2;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\AdminMTO\Registro-usuario.razor"
+using Newtonsoft.Json;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/nuevo-usuario")]
+    public partial class Registro_usuario : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -154,6 +168,7 @@ using Microsoft.AspNetCore.Authorization;
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime Js { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.SessionStorage.ISessionStorageService sessionStorage { get; set; }
     }
 }

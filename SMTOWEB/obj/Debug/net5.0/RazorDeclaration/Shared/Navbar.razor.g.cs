@@ -139,6 +139,20 @@ using Microsoft.AspNetCore.Authorization;
 #line hidden
 #nullable disable
 #nullable restore
+#line 21 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using SMTOWEB.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 22 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\_Imports.razor"
+using CurrieTechnologies.Razor.SweetAlert2;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 3 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Shared\Navbar.razor"
 using Newtonsoft.Json;
 
@@ -163,7 +177,6 @@ using Newtonsoft.Json;
         {
             try
             {
-
                 var storage = await Js.InvokeAsync<string>("Session");
                 user = JsonConvert.DeserializeObject<UserTemp>(storage);
                 StateHasChanged();
@@ -175,6 +188,8 @@ using Newtonsoft.Json;
             }
         }
     }
+
+
     public bool cierre { get; set; } = false;
     async Task Open()
     {

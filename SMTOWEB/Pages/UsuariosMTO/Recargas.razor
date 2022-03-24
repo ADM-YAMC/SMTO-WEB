@@ -1,5 +1,4 @@
-﻿@page "/Recargas"
-@layout UserLayout
+﻿@page "/pagina-principal/recargas"
 @inject IJSRuntime Js
 <style>
     .valid.modified:not([type=checkbox]) {
@@ -12,7 +11,7 @@
     <RadzenCard class="mt-3 ml-1 col-6 m-auto ">
         <div class="row">
             <div class="col">
-                <h3>Recargar mi tarjeta</h3>
+                <a class="btn btn-warning mr-2" href="pagina-principal">volver</a><h3 class="d-inline">Recargar mi tarjeta</h3>
             </div>
             <div class="col">
                 <i class="fab fa-cc-visa fa-2x float-right ml-2" style=" color: #0b5ed7 !important;"></i>
@@ -24,17 +23,26 @@
             <div class="border-top mt-3">
                 <div class="form-group mt-2">
                     <label class=" mb-1">Numero de tarjeta</label>
-                    <InputSelect @bind-Value="@recargas.IdTarjeta" class="form-control">
-                        <option value="1">965-456-7876</option>
+                    <InputSelect @bind-Value="@recargas.IdTarjeta" @onchange="OnChangeCard" class="form-control">
+                        @if (carsd != null)
+                            {
+                            @if (carsd.tarjeta.Count != 0)
+                                {
+                                @foreach (var item in carsd.tarjeta)
+                                    {
+                                    <option value="@item.idTarjeta">@item.numeroTarjeta</option>
+                                    }
+                                }
+                            }
                     </InputSelect>
                 </div>
             </div>
             <div class="form-group mb-2">
                 <label>Recargar</label>
-                <RadzenRadioButtonList @bind-Value=@value TValue="int">
+                <RadzenRadioButtonList @bind-Value=@value @onchange="@Changed" TValue="int">
                     <Items>
                         <RadzenRadioButtonListItem Text="Viajes" Value="1" />
-                        <RadzenRadioButtonListItem Text="Balance" Value="2" />
+                        <RadzenRadioButtonListItem  Text="Balance" Value="2" />
                     </Items>
                 </RadzenRadioButtonList>
             </div>
@@ -57,7 +65,7 @@
             {
                 <div class="form-group">
                     <label>Monto</label>
-                    <InputNumber @bind-Value="recargas.Balance" class="form-control"></InputNumber>
+                    <InputNumber @bind-Value="recargas.Balance"  class="form-control"></InputNumber>
                     <ValidationMessage For=@(() => recargas.Balance) />
                 </div>
                 <p class="mt-1">El monto mínimo de recarga es de RD$20.00 y el máximo de RD$2,000.00</p>
@@ -238,6 +246,18 @@ else
         else
         {
             msj = "";
+        }
+    }
+
+    void Changed(ChangeEventArgs args)
+    {
+        
+        if (value == 1)
+        {
+            recargas.Viajes = null;
+        }
+        else {
+            recargas.Balance = 0;
         }
     }
 

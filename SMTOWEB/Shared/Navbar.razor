@@ -56,7 +56,6 @@
         {
             try
             {
-
                 var storage = await Js.InvokeAsync<string>("Session");
                 user = JsonConvert.DeserializeObject<UserTemp>(storage);
                 StateHasChanged();
@@ -68,6 +67,8 @@
             }
         }
     }
+
+
     public bool cierre { get; set; } = false;
     async Task Open()
     {
