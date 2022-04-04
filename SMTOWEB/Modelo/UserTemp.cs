@@ -9,7 +9,7 @@ namespace SMTOWEB.Modelo
     {
        
             public int idUsuario { get; set; }
-            public string? idSucursal { get; set; }
+            public int? idSucursal { get; set; }
             public string nombreApellido { get; set; }
             public string cedula { get; set; }
             public string telefono { get; set; }

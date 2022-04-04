@@ -1,4 +1,4 @@
-﻿
+﻿@inject IJSRuntime Js
 <style>
 
 
@@ -72,87 +72,41 @@ overflow:hidden;
         <a href="#">content</a>*@
     <a>
         <RadzenPanelMenu Style="width:100%; overflow-y:hidden !important;">
-            <RadzenPanelMenuItem Text="Inicio" Path="/" Icon="home"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Usuarios" Path="usuarios" Icon="account_circle"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="FileInput" Path="fileinput" Icon="attach_file"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Dialog" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenPanelMenuItem>            
+            @if (user != null)
+            {
+                if (user.rol == "1")
+                {
+                    <RadzenPanelMenuItem Text="Inicio" Path="administrador" Icon="home"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Usuarios" Path="usuarios" Icon="account_circle"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Empresas" Path="fileinput" Icon="attach_file"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Sucursales" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Configuracion" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
+                }
+                else if (user.rol == "2")
+                {
+                    <RadzenPanelMenuItem Text="Inicio" Path="administrador" Icon="home"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Usuarios" Path="usuarios" Icon="account_circle"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Sucursales" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Configuracion" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
+                }
+                else if (user.rol == "3")
+                {
+                    <RadzenPanelMenuItem Text="Inicio" Path="smto-kiosko" Icon="home"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Reportes" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Configuracion" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
+                }
+                else if (user.rol == "4")
+                {
+                    <RadzenPanelMenuItem Text="Inicio" Path="pagina-principal" Icon="home"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Configuracion" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
+                }
+            }
         </RadzenPanelMenu>
         
     </a>
 </div>
 
-@*<style>
-    .rz-navigation-item-wrapper-active:before {
-        background-color: #00ff21 !important;
-    }
-    .rz-navigation-item-wrapper, .rz-navigation-item-link {
-        background: #012A4A;
-        border:none;
-        color: azure;
-    }
-    .rz-panel-menu .rz-navigation-item {
-        border-bottom: solid 1px #012A4A;
-        border-top: solid 1px #012A4A;
-    }
-    .rz-navigation-item-link:hover {
-        background: #013a63;
-        color: azure;
-    }
-    .btn-close.text-reset {
-        color: azure;
-    }
-</style>*@
 
-@*<div class="offcanvas offcanvas-start p-0" tabindex="-1" id="offcanvasExample" style="width: 19rem; background: #012A4A; color: azure;" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">SMTO</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body p-0">
-        <RadzenPanelMenu Style="width:100%">
-            <RadzenPanelMenuItem Text="General" Icon="home">
-                <RadzenPanelMenuItem Text="Buttons" data-bs-toggle="offcanvas" Path="puntos" Icon="account_circle"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Menu" Path="menu" Icon="line_weight"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="FileInput" Path="fileinput" Icon="attach_file"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Dialog" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
-            </RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Inputs" Icon="payment">
-                <RadzenPanelMenuItem Text="CheckBox" Path="checkbox" Icon="check_circle"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="TextBox" Path="textbox" Icon="input"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="TextArea" Path="textarea" Icon="description"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Password" Path="password" Icon="payment"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Numeric" Path="numeric" Icon="aspect_ratio"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="DatePicker" Path="datepicker" Icon="date_range"></RadzenPanelMenuItem>
-            </RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Data" Icon="save">
-                <RadzenPanelMenuItem Text="DataGrid" Path="datagrid" Icon="grid_on"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="DataList" Path="datalist" Icon="list"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="DropDown" Path="dropdown" Icon="dns"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="DropDownDataGrid" Path="dropdown-datagrid" Icon="receipt"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="ListBox" Path="listbox" Icon="view_list"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="TemplateForm" Path="templateform" Icon="line_style"></RadzenPanelMenuItem>
-            </RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Containers" Icon="account_box">
-                <RadzenPanelMenuItem Text="Tabs" Path="tabs" Icon="tab"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Panel" Path="panel" Icon="content_paste"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Fieldset" Path="fieldset" Icon="account_balance_wallet"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Card" Path="card" Icon="line_style"></RadzenPanelMenuItem>
-            </RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="More">
-                <RadzenPanelMenuItem Text="Item1"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="Item2"></RadzenPanelMenuItem>
-                <RadzenPanelMenuItem Text="More items">
-                    <RadzenPanelMenuItem Text="More sub items">
-                        <RadzenPanelMenuItem Text="Item1"></RadzenPanelMenuItem>
-                        <RadzenPanelMenuItem Text="Item2"></RadzenPanelMenuItem>
-                    </RadzenPanelMenuItem>
-                </RadzenPanelMenuItem>
-            </RadzenPanelMenuItem>
-        </RadzenPanelMenu>
-    </div>
-</div>*@
 
 @code {
     private bool collapseNavMenu = true;
@@ -163,5 +117,25 @@ overflow:hidden;
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    UserTemp user = new UserTemp();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            try
+            {
+                var storage = await Js.InvokeAsync<string>("Session");
+                user = JsonConvert.DeserializeObject<UserTemp>(storage);
+                StateHasChanged();
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Error");
+            }
+        }
     }
 }

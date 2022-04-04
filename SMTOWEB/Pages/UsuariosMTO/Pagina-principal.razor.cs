@@ -60,28 +60,31 @@ namespace SMTOWEB.Pages.UsuariosMTO
 
         async Task AddCardForUser()
         {
-            loading = true;
-            UpdateTarjeta = new Tarjeta()
+            if (tarjeta.ok)
             {
-                IdTarjeta = tarjeta.tarjeta[0].IdTarjeta,
-                IdUsuarioCreacion = tarjeta.tarjeta[0].IdUsuarioCreacion,
-                IdUsuarioTitular = user.idUsuario,
-                NumeroTarjeta = tarjeta.tarjeta[0].NumeroTarjeta,
-                Viajes = tarjeta.tarjeta[0].Viajes,
-                Balance = tarjeta.tarjeta[0].Balance,
-                Fecha = tarjeta.tarjeta[0].Fecha,
-                Estado = tarjeta.tarjeta[0].Estado
-            };
+                loading = true;
+                UpdateTarjeta = new Tarjeta()
+                {
+                    IdTarjeta = tarjeta.tarjeta[0].IdTarjeta,
+                    IdUsuarioCreacion = tarjeta.tarjeta[0].IdUsuarioCreacion,
+                    IdUsuarioTitular = user.idUsuario,
+                    NumeroTarjeta = tarjeta.tarjeta[0].NumeroTarjeta,
+                    Viajes = tarjeta.tarjeta[0].Viajes,
+                    Balance = tarjeta.tarjeta[0].Balance,
+                    Fecha = tarjeta.tarjeta[0].Fecha,
+                    Estado = tarjeta.tarjeta[0].Estado
+                };
 
-            string json = JsonConvert.SerializeObject(UpdateTarjeta);
-            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await http.PutAsync($"https://localhost:44391/api/Tarjetas/{UpdateTarjeta.IdTarjeta}", httpContent);
-            response = await responses.Content.ReadFromJsonAsync<Response>();
-            if (response.ok)
-            {
-                carsd = await getCard.Getcard(user.idUsuario);
-                //tarjetas = (TarjetaTemp)carsd.tarjeta.Reverse<TarjetaTemp>();
-                loading = false;
+                string json = JsonConvert.SerializeObject(UpdateTarjeta);
+                StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                var responses = await http.PutAsync($"https://localhost:44391/api/Tarjetas/{UpdateTarjeta.IdTarjeta}", httpContent);
+                response = await responses.Content.ReadFromJsonAsync<Response>();
+                if (response.ok)
+                {
+                    carsd = await getCard.Getcard(user.idUsuario);
+                    //tarjetas = (TarjetaTemp)carsd.tarjeta.Reverse<TarjetaTemp>();
+                    loading = false;
+                }
             }
         }
 

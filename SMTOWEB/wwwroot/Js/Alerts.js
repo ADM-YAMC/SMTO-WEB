@@ -98,3 +98,25 @@ function AlertLoginforms(mensaje, alerta) {
 function myfunction(mensaje) {
     console.log(mensaje);
 }
+
+function RecargaSuccess() {
+    Swal.fire({
+        title: '¡Exito!',
+        text: 'La recarga se a depositado con exito...',
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            
+        }
+    })
+}
+
+function DismmissModal(modal) {
+    $(modal).modal('hide');
+    confirm("Hola mundo")
+}
+export function CloseModal(modalId) {
+    $(modalId).modal('hide');
+}

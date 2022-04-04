@@ -1,104 +1,220 @@
 ﻿@*@layout VentasLayout*@
-@page "/Kiosco"
+@page "/smto-kiosco"
 @inject IJSRuntime Js
 
 <style>
-       @@media screen and (max-width: 800px) {
-        .row{
-            display:block;
+    @@media screen and (max-width: 800px) {
+        .row {
+            display: block;
+        }
 
+        .col-4 {
+            width: 100%;
         }
-        .col-4{
-            width:100%;
-        }
-        }
+    }
+
+    .valid.modified:not([type=checkbox]) {
+        outline: none;
+    }
+    .div1 {
+        clip-path: polygon(77% 0, 100% 0%, 100% 100%, 63% 100%, 22% 72%);
+        height: 62mm;
+        width: 100%;
+        position: absolute;
+        z-index: 34;
+        background: #1c57b9;
+        border-radius: 10px;
+    }
+    .div2 {
+        clip-path: polygon(0 0, 75% 0, 38% 35%, 0 70%);
+        height: 62mm;
+        width: 100%;
+        position: absolute;
+        z-index: 34;
+        background: #006797;
+        border-radius: 10px;
+
+    }
+    .div3 {
+        height: 62mm;
+        width: 100%;
+        position: absolute;
+        z-index: 34;
+        background: transparent;
+        border-radius: 10px;
+        color:aliceblue;
+        padding-left:12px;
+    }
 </style>
-<div class="container-xl p-4">
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Venta</button>
-            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Reportes</button>
-        </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="row">
-                <div class="col-lg-4">
-                    <RadzenCard class="mt-3 w-100">
-                        <div class="text-center">
-                            <div class="m-auto">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2580/2580363.png" height="50" width="50" alt="Alternate Text" />
+@if (pGetInfoSucursal != null)
+{
+    <div class="container-xl p-4">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Venta</button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Reportes</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <RadzenCard class="mt-3 w-100">
+                            <div class="text-center">
+                                <div class="m-auto">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2580/2580363.png" height="50" width="50" alt="Alternate Text" />
+                                </div>
+                                <p>@pGetInfoSucursal.Nombre_Sucursal</p>
+                                <label class="text-success">Activo</label>
                             </div>
-                            <p>Banca Diamante #45</p>
-                            <label class="text-success">Activo</label>
-                        </div>
 
-                        <div class="border-top mt-3 border-bottom mb-3">
-                            <div class="form-group mt-2">
-                                <label>Total vendido hoy</label>
-                                <h1 class=" mb-2 text-success">RD$300.00</h1>
+                            <div class="border-top mt-3 border-bottom mb-3">
+                                <div class="form-group mt-2">
+                                    <label>Total vendido hoy</label>
+                                    <h1 class=" mb-2 text-success">RD$300.00</h1>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <p>Ultima recgarga</p>
-                            <label>12-Feb-2022</label>
-                        </div>
-
-                    </RadzenCard>
-                </div>
-
-                <div class="col">
-                    <RadzenCard class="mt-3 mr-1 p-0">
-                        <div class="col mt-3">
-                            <h2 class="d-inline">Recargas</h2>
-                            <h3 style="float:right;" class="d-inline text-right">Ilimitado</h3>
-                        </div>
-                        <hr class="mb-0" />
-                        <div class="col p-4">
                             <div class="form-group">
-                                <h3>No. tarjeta</h3>
-                                <input type="number" placeholder="Escriba el numero de la tarjeta..." name="tarjeta" class="form-control" />
+                                <p>Ultima recgarga</p>
+                                <label>12-Feb-2022</label>
                             </div>
-                            <div class="form-group mb-2">
-                                <h3>Recargar</h3>
-                                <RadzenRadioButtonList @bind-Value=@value TValue="int">
-                                    <Items>
-                                        <RadzenRadioButtonListItem Text="Viajes" Value="1" />
-                                        <RadzenRadioButtonListItem Text="Balance" Value="2" />
-                                    </Items>
-                                </RadzenRadioButtonList>
-                            </div>
-                            @if (value == 1)
-                            {
 
-                                <div class="mb-1">
-                                    <div class="form-group">
-                                        <h3>Cantidad</h3>
-                                        <input type="number" style="font-size:25px; height:50px" class="form-control">
+                        </RadzenCard>
+                    </div>
+
+                    <div class="col">
+                        <RadzenCard class="mt-3 mr-1 p-0">
+                            <div class="col mt-3">
+                                <h2 class="d-inline">Recargas</h2>
+                                <h3 style="float:right;" class="d-inline text-right">RD$@(pGetInfoSucursal.Balance).00</h3>
+                            </div>
+                            <hr class="mb-0" />
+
+                            <div class="row">
+                                <div class="col-lg pr-0 mr-0">
+                                    <EditForm Model="recargas" OnValidSubmit="Procesar_pago">
+                                        <DataAnnotationsValidator />
+                                        <div class="col p-4">
+                                            <div class="form-group">
+                                                <h3>No. tarjeta</h3>
+                                                <InputNumber @bind-Value="recargas.numeroTarjeta" @oninput="GetCardInfo" class="form-control"></InputNumber>
+                                                <ValidationMessage For=@(() => recargas.numeroTarjeta) />
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label>Recargar</label>
+                                                <RadzenRadioButtonList @bind-Value=@value TValue="int">
+                                                    <Items>
+                                                        <RadzenRadioButtonListItem Text="Viajes" Value="1" />
+                                                        <RadzenRadioButtonListItem Text="Balance" Value="2" />
+                                                    </Items>
+                                                </RadzenRadioButtonList>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label>@(value == 1 ? "Cantidad de viajes":"Monto a recargar")</label>
+                                                <InputNumber @bind-Value="recargas.BalanceViaje" class="form-control" style="height:50px; font-size:24px;"></InputNumber>
+                                                <ValidationMessage For=@(() => recargas.BalanceViaje) />
+                                                <p class="mt-1">
+                                                    @(value==2 ? "El monto mínimo de recarga es de RD$20.00 y el máximo de RD$2,000.00"
+                                    : "Cantidad maxima de viajes 20")
+
+                                                </p>
+                                                <p class="mt-1 text-danger">
+                                                    @(value == 2 && recargas.BalanceViaje <20 ? "El balance a recargar es menor al balace requerido...":"")
+
+                                                </p>
+                                                <p class="mt-1 text-danger">
+                                                    @(value == 2 && recargas.BalanceViaje > 2000 ? "El balance a recargar es mayor al balace requerido...":"")
+
+                                                </p>
+                                                <p class="mt-1 text-danger">
+                                                    @(value == 1 && recargas.BalanceViaje > 20 ? "A sobrepasado la cantidad maxima de viajes...":"")
+
+                                                </p>
+                                                <p class="mt-1 text-danger">
+                                                    @(value == 1 &&  recargas.BalanceViaje ==0 ? "La cantidad de viajes no puede ser 0":"")
+                                                </p>
+                                                <p class="mt-1 text-danger">
+                                                    @(value == 2 &&  recargas.BalanceViaje ==0 ? "La cantidad de balance no puede ser 0":"")
+                                                </p>
+                                            </div>
+                                            <hr class="mb-0" />
+                                            <input type="submit" class="btn btn-success w-100" value="Recargar" />
+                                        </div>
+                                    </EditForm>
+                                </div>
+                                @if (responseCardFor != null && responseCardFor.ok)
+                                {
+                                    <div class="col-lg">
+                                        <div class="col pl-0 ml-0">
+                                            <div class="mt-4" style="width: 100%; height: 62mm; background: #45536b; border-radius: 10px; position: relative; ">
+                                                <div class="div1">
+
+                                                </div>
+                                                <div class="div2">
+                                                    <img src="https://www.opret.gob.do/Images/logoOPRETFooter.png" height="85" width="80" style="margin-left:4px;" alt="Alternate Text" />
+                                                </div>
+                                                <div class="div3">
+                                                    <h3 class="text-white pb-1 mb-1 d-inline text-right pr-3 mt-2" style="float:right;">$@responseCardFor.tarjeta.balance</h3>
+                                                    <h3 class="text-white pb-1 mb-1 d-inline text-right pr-2 mt-2" style="float:right;"><ion-icon name="swap-vertical-sharp"></ion-icon>@responseCardFor.tarjeta.viajes</h3>
+
+                                                    <h3 class="text-white pb-1 mb-1" style="margin-top:41%;">@responseCardFor.tarjeta.numeroTarjeta</h3>
+                                                    <label>@user.nombreApellido.ToUpper()</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg">
+
+                                        </div>
                                     </div>
+
+                                }
+                                @if (responseCardFor != null)
+                                {
+                                    @if (!responseCardFor.ok)
+                                    {
+                                        <div class="col-lg mt-5 mr-2">
+                                            <div class="alert alert-danger">
+                                                El numero de la tarjeta es incorrecto o la tarjeta no esta activa...
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+
+                        </RadzenCard>
+                        @if (response != null)
+                        {
+                            @if (response.ok)
+                            {
+                                <div class="alert alert-success">
+                                    @response.mensaje
                                 </div>
                             }
                             else
                             {
-                                <div class="form-group">
-                                    <h3>Monto</h3>
-                                    <input type="number" style="font-size:25px; height:50px;" class="form-control">
+                                <div class="alert alert-danger">
+                                    @response.mensaje
                                 </div>
-                                <p class="mt-1">El monto mínimo de recarga es de RD$20.00 y el máximo de RD$2,000.00</p>
                             }
-                        </div>
-
-                    </RadzenCard>
+                        }
+                    </div>
                 </div>
+
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                Reortes
             </div>
         </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            Reortes
-        </div>
     </div>
-</div>
-  
-    @code {
-        int value = 1;
-    }
+}
+else
+{
+    <Loading></Loading>
+}
+
+@code {
+    int value = 1;
+}

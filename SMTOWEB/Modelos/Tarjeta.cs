@@ -33,9 +33,11 @@ namespace SMTO_API.Modelos
         public int balance { get; set; }
         public DateTime fecha { get; set; }
         public bool estado { get; set; }
-        //public List<Entradum> entradas { get; set; }
-        //public List<Salida> salidas { get; set; }
-        //public List<HistorialRecarga> historialRecargas { get; set; }
+    }
+    public class ResponseCardForNumber
+    {
+        public bool ok { get; set; }
+        public TarjetaTemp? tarjeta { get; set; }
     }
 
     public class Root

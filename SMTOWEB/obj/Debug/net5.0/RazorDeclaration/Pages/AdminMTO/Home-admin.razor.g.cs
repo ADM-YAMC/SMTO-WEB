@@ -159,7 +159,7 @@ using CurrieTechnologies.Razor.SweetAlert2;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/index")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/administrador")]
     public partial class Home_admin : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998

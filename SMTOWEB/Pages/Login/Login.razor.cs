@@ -33,12 +33,7 @@ namespace SMTOWEB.Pages.Login
                 if (respuesta.ok)
                 {
 
-                    if (respuesta.user[0].rol == "Usuario")
-                    {
-                        await JS.InvokeVoidAsync("storage", respuesta.user[0]);
-                        NavigationManager.NavigateTo("/pagina-principal");
-                        loading = false;
-                    }
+                    await Redirecion(respuesta.user[0].rol);
 
                 }
                 else
@@ -53,7 +48,37 @@ namespace SMTOWEB.Pages.Login
                 loading = false;
             }
         }
+        async Task Redirecion(string rol)
+        {
+
+            switch (rol)
+            {
+                case "1":
+                    await JS.InvokeVoidAsync("storage", respuesta.user[0]);
+                    NavigationManager.NavigateTo("/administrador");
+                    loading = false;
+                    break;
+                case "2":
+                    await JS.InvokeVoidAsync("storage", respuesta.user[0]);
+                    NavigationManager.NavigateTo("/administrador");
+                    loading = false;
+                    break;
+                case "3":
+                    await JS.InvokeVoidAsync("storage", respuesta.user[0]);
+                    NavigationManager.NavigateTo("/smto-kiosco");
+                    loading = false;
+                    break;
+                case "4":
+                    await JS.InvokeVoidAsync("storage", respuesta.user[0]);
+                    NavigationManager.NavigateTo("/pagina-principal");
+                    loading = false;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
+    
 
     public class userDataLogin
     {

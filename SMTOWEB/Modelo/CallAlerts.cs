@@ -21,5 +21,10 @@ namespace SMTOWEB.Modelo
         {
             await _jSRuntime.InvokeVoidAsync("success");
         }
+
+        public async Task AlertSuccessAddRecarga(IJSRuntime _jSRuntime)
+        {
+            await _jSRuntime.InvokeVoidAsync("RecargaSuccess");
+        }
     }
 }

@@ -201,11 +201,11 @@
       "mscorlib.dll": "sha256-0qsbc1acYr3S6P7t9gSYyghOhMVs3CTJ9ukQ1VXqksY=",
       "netstandard.dll": "sha256-4Ejn1oHpeqmTQlJx7Kjuipn0ZVOoG0hGncN+9qyL1lo=",
       "System.Private.CoreLib.dll": "sha256-7n\/jioZu+\/2tD7v1RgjTTrBrviX+kVwPFGJ\/JBsHQGA=",
-      "SMTOWEB.dll": "sha256-e3Kt7oX6GKcP8JRsKKzkQaUEp0PvIRu4ua0CuYsdaKU="
+      "SMTOWEB.dll": "sha256-Ef4nKx9hhZIZzkSjmdvZVo9B\/zfpc76BpKVIRQtThNk="
     },
     "lazyAssembly": null,
     "pdb": {
-      "SMTOWEB.pdb": "sha256-8kvlaLmiuBOwxzug5E3SBm3Am3UoUiSgTuqgRaggv7A="
+      "SMTOWEB.pdb": "sha256-DGtBnegbQSvO4IThkZXfSPH+opPgiomxxqsfOc6zzHY="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-Uv0JiOiPEvlGxygIhcdY8XYm\/Nt+zgVckKrqB2uih0w=",

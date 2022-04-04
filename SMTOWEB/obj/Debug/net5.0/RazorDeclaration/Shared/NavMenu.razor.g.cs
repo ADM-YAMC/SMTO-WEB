@@ -167,7 +167,7 @@ using CurrieTechnologies.Razor.SweetAlert2;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 157 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Shared\NavMenu.razor"
+#line 111 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
@@ -179,9 +179,30 @@ using CurrieTechnologies.Razor.SweetAlert2;
         collapseNavMenu = !collapseNavMenu;
     }
 
+    UserTemp user = new UserTemp();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            try
+            {
+                var storage = await Js.InvokeAsync<string>("Session");
+                user = JsonConvert.DeserializeObject<UserTemp>(storage);
+                StateHasChanged();
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Error");
+            }
+        }
+    }
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime Js { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.SessionStorage.ISessionStorageService sessionStorage { get; set; }
     }
 }

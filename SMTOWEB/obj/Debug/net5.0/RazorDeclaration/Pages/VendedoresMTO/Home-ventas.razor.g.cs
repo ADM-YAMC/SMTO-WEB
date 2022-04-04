@@ -159,7 +159,7 @@ using CurrieTechnologies.Razor.SweetAlert2;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Kiosco")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/smto-kiosco")]
     public partial class Home_ventas : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -168,10 +168,9 @@ using CurrieTechnologies.Razor.SweetAlert2;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 102 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\VendedoresMTO\Home-ventas.razor"
-           
-        int value = 1;
-    
+#line 218 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\VendedoresMTO\Home-ventas.razor"
+       
+    int value = 1;
 
 #line default
 #line hidden

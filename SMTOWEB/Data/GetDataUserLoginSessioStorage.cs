@@ -12,10 +12,9 @@ namespace SMTOWEB.Data
 {
     public class GetDataUserLoginSessioStorage
     {
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
+        
         UserTemp user = new UserTemp();
-       public async Task<UserTemp> GetDataLogin()
+       public async Task<UserTemp> GetDataLogin(IJSRuntime JSRuntime)
         {
                 try
                 {

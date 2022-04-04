@@ -167,66 +167,6 @@ using CurrieTechnologies.Razor.SweetAlert2;
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 217 "C:\Users\Alex-carreras\Desktop\SMTOWEB\SMTOWEB\Pages\UsuariosMTO\Recargas.razor"
-       
-    int value = 1;
-    Modelo.Recargas recargas = new Modelo.Recargas();
-    MetodoPago metodoPago = new MetodoPago();
-    string digitos_finales = "", msj;
-    bool resultado = true, forms = true;
-
-    async Task Metodo_pago()
-    {
-        var result = new string(metodoPago.Numero_tarjeta_pago.Reverse().Take(4).Reverse().ToArray());
-        digitos_finales = result;
-
-        resultado = await Js.InvokeAsync<bool>("fValidarTarjeta", metodoPago.Numero_tarjeta_pago);
-        Console.WriteLine(resultado);
-
-    }
-
-    async Task SelectedCarsChanged(ChangeEventArgs e)
-    {
-        Console.WriteLine(e.Value);
-
-        if (e.Value.ToString().Length >= 16)
-        {
-            resultado = await Js.InvokeAsync<bool>("fValidarTarjeta", e.Value);
-            if (!resultado)
-            {
-                msj = "El numero de la tarjeta es invalido...";
-            }
-        }
-        else
-        {
-            msj = "";
-        }
-    }
-
-    void Changed(ChangeEventArgs args)
-    {
-        
-        if (value == 1)
-        {
-            recargas.Viajes = null;
-        }
-        else {
-            recargas.Balance = 0;
-        }
-    }
-
-    void CloseModal()
-    {
-        metodoPago = new MetodoPago();
-        msj = "";
-        digitos_finales = "";
-    }
-
-
-#line default
-#line hidden
-#nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime Js { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.SessionStorage.ISessionStorageService sessionStorage { get; set; }
     }

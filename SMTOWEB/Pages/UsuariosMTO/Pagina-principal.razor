@@ -160,32 +160,9 @@ else
                             <ValidationMessage For=@(() => _Tajeta.numero) />
                         </div>
                     </div>
-                    @if (inputTarjeta >= 9 && inputTarjeta <= 10)
+                    @if (tarjeta != null)
                     {
-                        @if (tarjeta != null)
-                        {
-                            @if (tarjeta.ok == false)
-                            {
-                                <div class="alert alert-warning">
-                                    @tarjeta.mensaje o no existe...
-                                </div>
-                            }
-                            else
-                            {
-                                @if (tarjeta.tarjeta[0].IdUsuarioTitular == 0)
-                                {
-                                    <div class="alert alert-success">
-                                        La tarjeta esta lista para usarse!
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="alert alert-danger">
-                                        Lo sentimos. La tarjeta ya esta en uso...
-                                    </div>
-                                }
-                            }
-                        }
+                       @((MarkupString)tarjeta.mensaje)
                     }
                     @if (inputTarjeta > 10)
                     {
@@ -197,7 +174,7 @@ else
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         @if (tarjeta != null)
                         {
-                            <button  data-bs-dismiss="modal" type="submit" class="btn btn-primary">Agregar</button>
+                            <button data-bs-dismiss="modal" type="submit" disabled="@(!tarjeta.ok || user.idUsuario == tarjeta.tarjeta[0].IdUsuarioTitular)" class="btn btn-primary">Agregar</button>
                         }
                     </div>
                 </EditForm>

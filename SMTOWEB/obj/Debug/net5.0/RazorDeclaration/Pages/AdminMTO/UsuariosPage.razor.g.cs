@@ -180,7 +180,7 @@ using Newtonsoft.Json;
     {
 
         usuarios = await usuariosServices.GetUsuarios();
-        user = await getData.GetDataLogin();
+        user = await getData.GetDataLogin(Js);
 
         StateHasChanged();
     }
