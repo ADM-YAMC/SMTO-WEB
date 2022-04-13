@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-#nullable disable
+
 
 namespace SMTO_API.Modelos
 {
@@ -9,9 +10,9 @@ namespace SMTO_API.Modelos
     {
         public bool ok { get; set; }
         public string? mensaje { get; set; }
-        public List<Tarjeta> tarjeta { get; set; }
+        public List<Tarjeta>? tarjeta { get; set; }
     }
-    public partial class Tarjeta
+    public class Tarjeta
     {
         public int IdTarjeta { get; set; }
         public int? IdUsuarioTitular { get; set; }
@@ -27,6 +28,7 @@ namespace SMTO_API.Modelos
     {
         public int idTarjeta { get; set; }
         public int idUsuarioTitular { get; set; }
+      
         public int numeroTarjeta { get; set; }
         public int idUsuarioCreacion { get; set; }
         public int viajes { get; set; }

@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SMTOWEB.Modelo;
+using CurrieTechnologies.Razor.SweetAlert2;
 
 namespace SMTOWEB.Pages.Login
 {
@@ -20,6 +21,8 @@ namespace SMTOWEB.Pages.Login
         public Root respuesta;
         userDataLogin dataLogin = new userDataLogin();
         bool loading = false;
+        [Inject]
+        SweetAlertService Swal { get; set; }
        private async Task logout()
         {
             try
@@ -38,13 +41,14 @@ namespace SMTOWEB.Pages.Login
                 }
                 else
                 {
-                    await JS.InvokeVoidAsync("AlertLoginforms", respuesta.mensaje, "error");
+                    await Swal.FireAsync("Oops...", $"hola mundo", "error");
+                    //await JS.InvokeVoidAsync("AlertLoginforms", respuesta.mensaje, "error");
                     loading = false;
                 }
             }
             catch (Exception)
             {
-                await JS.InvokeVoidAsync("errorNotFound");
+                //await Swal.FireAsync("Oops...", $"{respuesta.mensaje}", "error");
                 loading = false;
             }
         }

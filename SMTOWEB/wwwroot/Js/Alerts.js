@@ -117,6 +117,3 @@ function DismmissModal(modal) {
     $(modal).modal('hide');
     confirm("Hola mundo")
 }
-export function CloseModal(modalId) {
-    $(modalId).modal('hide');
-}

@@ -26,8 +26,8 @@ namespace SMTOWEB.Modelo
         [Required(ErrorMessage = "Desbes de introducir el monto o la cantidad de viajes....")]
         public int? BalanceViaje { get; set; }
         public DateTime Fecha { get; set; }
-        [Required(ErrorMessage = "Debes de selecionar una de tus tarjetas...")]
-        public int? numeroTarjeta { get; set; }
+        [Required(ErrorMessage = "Debes de escribir el numero de la tarjeta...")]
+        public string numeroTarjeta { get; set; }
     }
 
 

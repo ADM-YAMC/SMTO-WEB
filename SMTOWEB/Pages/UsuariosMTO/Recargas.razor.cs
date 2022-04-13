@@ -106,7 +106,7 @@ namespace SMTOWEB.Pages.UsuariosMTO
         async Task Procesar_pago()
         {
             loading = true;
-             var tarjeta = carsd.tarjeta.Find(x =>x.numeroTarjeta == recargas.numeroTarjeta);
+             var tarjeta = carsd.tarjeta.Find(x =>x.numeroTarjeta == Convert.ToInt32(recargas.numeroTarjeta));
           
              response = await Procesar_Recargas.Procesar_pago_recarga_adactador(recargas, tarjeta, value, user);
             
@@ -124,7 +124,7 @@ namespace SMTOWEB.Pages.UsuariosMTO
 
         void OnChangeCard(ChangeEventArgs args)
         {
-            recargas.numeroTarjeta = Convert.ToInt32(args.Value);
+            recargas.numeroTarjeta = args.Value.ToString();
         }
 
        
