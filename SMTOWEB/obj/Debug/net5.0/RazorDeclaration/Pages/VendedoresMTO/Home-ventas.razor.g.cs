@@ -182,9 +182,15 @@ using SMTOWEB.Pages.VendedoresMTO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 238 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\VendedoresMTO\Home-ventas.razor"
+#line 259 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\VendedoresMTO\Home-ventas.razor"
        
     int value = 1;
+
+    int prueva(int id)
+    {
+        Console.WriteLine(id);
+        return id;
+    }
 
 #line default
 #line hidden

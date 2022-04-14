@@ -32,4 +32,11 @@ namespace SMTO_API.Modelos
         public string NombreUsuario { get; set; }
         public string Rol { get; set; }
     }
+
+   public class CustomUsuarios
+    {
+        public bool Ok { get; set; }
+        public string Mensaje { get; set; }
+        public List<Usuario>? Usuarios { get; set; }
+    }
 }

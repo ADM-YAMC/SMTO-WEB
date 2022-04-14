@@ -41,8 +41,8 @@ namespace SMTOWEB.Pages.Login
                 }
                 else
                 {
-                    await Swal.FireAsync("Oops...", $"hola mundo", "error");
-                    //await JS.InvokeVoidAsync("AlertLoginforms", respuesta.mensaje, "error");
+                    //await Swal.FireAsync("Oops...", $"hola mundo", "error");
+                    await JS.InvokeAsync<object>("AlertLoginforms", respuesta.mensaje, "error");
                     loading = false;
                 }
             }

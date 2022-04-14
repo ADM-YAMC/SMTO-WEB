@@ -76,6 +76,10 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "QRCoderNetCore": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Radzen.Blazor": {
               "target": "Package",
               "version": "[3.15.3, )"

@@ -49,6 +49,17 @@
         color: aliceblue;
         padding-left: 12px;
     }
+
+    .div4 {
+        height: 62mm;
+        width: 100%;
+        position: absolute;
+        z-index: 34;
+        background: transparent;
+        border-radius: 10px;
+        color: aliceblue;
+        padding-left: 12px;
+    }
 </style>
 @if (pGetInfoSucursal != null)
 {
@@ -105,7 +116,7 @@
                                         <div class="col p-4">
                                             <div class="form-group">
                                                 <h3>No. tarjeta</h3>
-                                                <RadzenMask Mask="*********" CharacterPattern="[0-9]" Placeholder="000000000" Name="SN"
+                                                <RadzenMask Mask="*********" autofocus CharacterPattern="[0-9]" Placeholder="000000000" Name="SN"
                                                             @bind-Value=@recargas.numeroTarjeta Change="@(args => GetCardInfo(args))" class="form-control" Style="width: 100%;" />
                                                 <ValidationMessage For=@(() => recargas.numeroTarjeta) />
                                             </div>
@@ -168,7 +179,17 @@
                                                     <h3 class="text-white pb-1 mb-1 d-inline text-right pr-2 mt-2" style="float:right;"><ion-icon name="swap-vertical-sharp"></ion-icon>@responseCardFor.tarjeta.viajes</h3>
 
                                                     <h3 class="text-white pb-1 mb-1" style="margin-top:41%;">@responseCardFor.tarjeta.numeroTarjeta</h3>
-                                                    <label>@user.nombreApellido.ToUpper()</label>
+                                                    @if (usuarioTitular != null)
+                                                    {
+                                                        <label>@usuarioTitular.Usuarios[0].NombreApellido.ToUpper()</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label>USUARIO SIN ASIGNAR</label>
+                                                    }
+                                                </div>
+                                                <div class="div4">
+                                                    <img src="@QRCodeSTR" height="100" width="100" style="margin-left:68.5%; margin-top:5.7rem; border-radius:5px;" alt="Alternate Text" />
                                                 </div>
                                             </div>
                                         </div>
@@ -237,4 +258,10 @@ else
 
 @code {
     int value = 1;
+
+    int prueva(int id)
+    {
+        Console.WriteLine(id);
+        return id;
+    }
 }

@@ -1363,3 +1363,12 @@ C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\SMTOWE
 C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\build-gz\+MZPwMTY.gz
 C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\VendedoresMTO\Activar_tarjetas.razor.g.cs
 C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\VendedoresMTO\Activar_tarjetas.razor.g.cs
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\Microsoft.Win32.SystemEvents.dll.gz
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\QRCoder.dll.gz
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\System.Drawing.Common.dll.gz
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\Microsoft.Win32.SystemEvents.dll
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\QRCoder.dll
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\bin\Debug\net5.0\wwwroot\_framework\System.Drawing.Common.dll
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\build-gz\Oez+bb+v.gz
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\build-gz\jTmCVhAg.gz
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\build-gz\cvMc0G3y.gz

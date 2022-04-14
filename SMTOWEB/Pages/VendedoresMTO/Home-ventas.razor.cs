@@ -1,10 +1,14 @@
 ﻿using Microsoft.JSInterop;
 using Newtonsoft.Json;
+using QRCoder;
 using SMTO_API.Modelos;
 using SMTOWEB.Modelo;
 using SMTOWEB.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -28,14 +32,24 @@ namespace SMTOWEB.Pages.VendedoresMTO
         Timer _tm = null;
         AutoResetEvent _autoEvent = null;
         int conunt = 0;
+        CustomUsuarios usuarioTitular;
+        string QRCodeSTR;
         protected override async Task OnInitializedAsync()
         {
 
-            user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
-            if (user != null)
+            try
             {
-                await pGetdataSucursal();
-                await GetTotalVendidoDia();
+                user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
+                if (user != null)
+                {
+                    await pGetdataSucursal();
+                    await GetTotalVendidoDia();
+                }
+            }
+            catch (Exception)
+            {
+
+                totalVenta = new TotalVentaDia();
             }
            
         }
@@ -44,12 +58,37 @@ namespace SMTOWEB.Pages.VendedoresMTO
             if (args.Length == 9)
             {
                 responseCardFor = await Http.GetFromJsonAsync<ResponseCardForNumber>($"https://localhost:44391/api/Tarjetas/tarjeta/{args}");
+                if (responseCardFor.ok)
+                {
+                    if (responseCardFor?.tarjeta?.idUsuarioTitular != 0)
+                    {
+                        usuarioTitular = await Http.GetFromJsonAsync<CustomUsuarios>($"https://localhost:44391/api/Usuarios/{responseCardFor.tarjeta.idUsuarioTitular}");
+                      
+                    }
+                    
+                }
+                QR(responseCardFor.tarjeta.numeroTarjeta.ToString());
             }
             else
             {
                 responseCardFor = null;
             }
 
+        }
+
+        void QR(string numeroT)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
+                QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(numeroT, QRCodeGenerator.ECCLevel.Q);
+                QRCode qRCode = new QRCode(qRCodeData);
+                using (Bitmap oBit = qRCode.GetGraphic(20))
+                {
+                    oBit.Save(ms, ImageFormat.Png);
+                    QRCodeSTR = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                }
+            }
         }
 
         async Task GetTotalVendidoDia()
