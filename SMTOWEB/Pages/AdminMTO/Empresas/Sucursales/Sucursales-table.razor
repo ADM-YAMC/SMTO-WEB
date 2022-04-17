@@ -1,0 +1,71 @@
+﻿@inject HttpClient http
+@inject IJSRuntime Js
+@inject ISessionStorageService sessionStorage;
+@inject NavigationManager navigate
+
+@if (sucursals != null)
+{
+    @if (sucursals.Count != 0)
+    {
+        <RadzenDataGrid AllowFiltering="true" @ref="grid" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="6"
+                        AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        Data="@sucursals" TItem="Sucursal" ColumnWidth="300px"
+                        LogicalFilterOperator="LogicalFilterOperator.Or">
+            <Columns>
+                <RadzenDataGridColumn TItem="Sucursal" Property="NombreSucursal" Title="Nombre sucursal" Width="100px" />
+                <RadzenDataGridColumn TItem="Sucursal" Property="Direccion" Title="Direccion" Width="100px" />
+                <RadzenDataGridColumn TItem="Sucursal" Property="Telefono" Title="Telefono" Width="80px" />
+                <RadzenDataGridColumn TItem="Sucursal" Property="Estado" Title="Estado" Width="100px">
+                    <Template Context="data">
+                        <div class="col d-flex justify-content-center">
+                            @if (data.Estado == true)
+                            {
+                                <RadzenBadge BadgeStyle="BadgeStyle.Success" IsPill="true" Text="Activa" />
+                            }
+                            else
+                            {
+                                <RadzenBadge BadgeStyle="BadgeStyle.Danger" IsPill="true" Text="Bloqueada" />
+                            }
+                        </div>
+                       
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Sucursal" Property="Estado" Title="Cambio de estado" Width="100px">
+                    <Template Context="data">
+                        <div class="col d-flex justify-content-center">
+                            <RadzenSwitch @bind-Value=@data.Estado Change=@(args => OnChange(args,(data.Estado==true ? "activar":"desactivar"), data)) />
+
+                        </div>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Sucursal" Title="Opciones" Width="70px" Filterable="false">
+                    <Template Context="data">
+                        <div class="col d-flex justify-content-center">
+                            <RadzenButton Click="@(()=>navigate.NavigateTo($"empresa/{empresa.IdEmpresa}/sucursales/editar-sucursal/{data.IdSucursal}"))" Style="display:inline; margin-right:4px;" Icon="edit" ButtonStyle="ButtonStyle.Success" />
+                            <RadzenButton Click="@(()=>ConfirmarEliminacionSucursal(data))" Style="display:inline" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
+
+                        </div>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No se encontraron datos...
+        </div>
+    }
+}
+else
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+
+@code {
+
+}

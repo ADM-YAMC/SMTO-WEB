@@ -1,6 +1,7 @@
 ﻿@inject IJSRuntime Js
-@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject ISessionStorageService sessionStorage;
 @using Newtonsoft.Json
+@inject NavigationManager navigate
 <style>
     .cursor {
         cursor: pointer;
@@ -36,11 +37,7 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="40" height="40" class="rounded-circle cursor" />
                 </Template>
                 <ChildContent>
-                    <RadzenProfileMenuItem Text="Buttons" Path="buttons" Icon="account_circle"></RadzenProfileMenuItem>
-                    <RadzenProfileMenuItem Text="Menu" Path="menu" Icon="line_weight"></RadzenProfileMenuItem>
-                    <RadzenProfileMenuItem Text="FileInput" Path="fileinput" Icon="attach_file"></RadzenProfileMenuItem>
-                    <RadzenProfileMenuItem Text="Dialog" Path="dialog" Icon="perm_media"></RadzenProfileMenuItem>
-                    <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenProfileMenuItem>
+                    <RadzenButton Click="Salir" Text="Salir" Icon="account_circle"></RadzenButton>
                 </ChildContent>
             </RadzenProfileMenu>
         </div>
@@ -49,24 +46,38 @@
 
 @code{
     UserTemp user = new UserTemp();
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+
+
+    protected override async Task OnInitializedAsync()
     {
 
-        if (firstRender)
+        try
         {
-            try
-            {
-                var storage = await Js.InvokeAsync<string>("Session");
-                user = JsonConvert.DeserializeObject<UserTemp>(storage);
-                StateHasChanged();
-            }
-            catch (Exception)
-            {
-
-                Console.WriteLine("Error");
-            }
+            user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
         }
+        catch (Exception)
+        {
+        }
+
     }
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+
+    //    if (firstRender)
+    //    {
+    //        try
+    //        {
+    //            var storage = await Js.InvokeAsync<string>("Session");
+    //            user = JsonConvert.DeserializeObject<UserTemp>(storage);
+    //            StateHasChanged();
+    //        }
+    //        catch (Exception)
+    //        {
+
+    //            Console.WriteLine("Error");
+    //        }
+    //    }
+    //}
 
 
     public bool cierre { get; set; } = false;
@@ -82,4 +93,12 @@
             await Js.InvokeVoidAsync("closeNav");
         }
     }
+
+    async Task Salir()
+    {
+        await sessionStorage.RemoveItemAsync("usuario");
+        navigate.NavigateTo("/");
+    }
+
+
 }

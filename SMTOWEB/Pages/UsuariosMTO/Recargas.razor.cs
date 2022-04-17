@@ -74,22 +74,17 @@ namespace SMTOWEB.Pages.UsuariosMTO
 
         }
 
-        async Task SelectedCarsChanged(ChangeEventArgs e)
+        async Task SelectedCarsChanged(string e)
         {
-            Console.WriteLine(e.Value);
-
-            if (e.Value.ToString().Length >= 16)
-            {
-                resultado = await Js.InvokeAsync<bool>("fValidarTarjeta", e.Value);
-                if (!resultado)
-                {
-                    msj = "El numero de la tarjeta es invalido...";
-                }
-            }
-            else
-            {
-                msj = "";
-            }
+                //resultado = await Js.InvokeAsync<bool>("fValidarTarjeta", e);
+                //if (!resultado)
+                //{
+                //    msj = "El numero de la tarjeta es invalido...";
+                //}
+                //else
+                //{
+                //    msj = "";
+                //}
         }
 
         async Task SomeMethod()

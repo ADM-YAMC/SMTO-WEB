@@ -1,0 +1,95 @@
+﻿@page "/kiosco/reportes"
+@inject HttpClient http
+@inject ISessionStorageService sessionStorage;
+
+<div class="row mb-3">
+    <div class="col">
+        <h2>
+            Reportes
+        </h2>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <RadzenButton Click="@(() => getReporteHoy())" Text="Hoy" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Click="@(() => getReporteAyer())" Text="Ayer" ButtonStyle="ButtonStyle.Info" />
+        <RadzenButton Click="@(() => getReporteEsteMes())" Text="Este mes" ButtonStyle="ButtonStyle.Success" />
+        <RadzenButton Click="@(() => getReporteMesPasado())" Text="Mes pasado" ButtonStyle="ButtonStyle.Warning" />
+    </div>
+</div>
+
+<RadzenCard>
+    @if (responseReporteSucursal != null)
+    {
+        @if (responseReporteSucursal.reporte.Count != 0)
+        {
+            <div class="row mb-3 border-bottom">
+                <div class="col">
+                    <h2>
+                        @tipoReporte
+                    </h2>
+                </div>
+                <div class="col text-right">
+                    @{ 
+                        var total = 0;
+                        foreach (var item in responseReporteSucursal.reporte)
+                        {
+                            total += item.TotalVendido;
+                        }
+                        <h3 class="text-success">
+                            RD$@(String.Format("{0:n0}",total))
+                        </h3>
+                    }
+                </div>
+            </div>
+            <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="6"
+                            AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                            Data="@responseReporteSucursal.reporte" TItem="Reporte_sucursal_mes" ColumnWidth="300px"
+                            LogicalFilterOperator="LogicalFilterOperator.Or">
+                <Columns>
+                    <RadzenDataGridColumn TItem="Reporte_sucursal_mes" Property="Numero_Tarjeta" Title="Numero de tarjeta" Width="140px" />
+                    <RadzenDataGridColumn TItem="Reporte_sucursal_mes" Property="Balance" Title="Balance recargado" Width="100px">
+                        <Template Context="data">
+                            <div class="alert alert-@(data.Balance==0 ? "danger":"success") mb-0" role="status">
+                                RD$@(String.Format("{0:n0}",data.Balance))
+                            </div>
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Reporte_sucursal_mes" Property="Viajes" Title="Viajes" Width="100px">
+                        <Template Context="data">
+                            <div class="alert alert-@(data.Viajes==0 ? "danger":"success") mb-0" role="status">
+                                @data.Viajes
+                            </div>
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Reporte_sucursal_mes" Property="TotalVendido" Title="Total vendido" Width="100px">
+                        <Template Context="data">
+                            RD$@(String.Format("{0:n0}",data.TotalVendido))
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Reporte_sucursal_mes" Property="Fecha_Creacion" Title="Fecha" Width="140px">
+                        <Template Context="data">
+                            @(Convert.ToDateTime(data.Fecha_Creacion).ToString("dd/MM/yyyy hh:mm:ss tt"))
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                No se encontraron datos...
+            </div>
+        }
+    }
+    else
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+</RadzenCard>
+
+@code {
+
+}

@@ -2,7 +2,7 @@
 @page "/smto-kiosco"
 @inject IJSRuntime Js
 @inject ISessionStorageService sessionStorage;
-
+@inject NavigationManager navigate
 
 <style>
     @@media screen and (max-width: 800px) {
@@ -179,9 +179,9 @@
                                                     <h3 class="text-white pb-1 mb-1 d-inline text-right pr-2 mt-2" style="float:right;"><ion-icon name="swap-vertical-sharp"></ion-icon>@responseCardFor.tarjeta.viajes</h3>
 
                                                     <h3 class="text-white pb-1 mb-1" style="margin-top:41%;">@responseCardFor.tarjeta.numeroTarjeta</h3>
-                                                    @if (usuarioTitular != null)
+                                                    @if (usuario != null)
                                                     {
-                                                        <label>@usuarioTitular.Usuarios[0].NombreApellido.ToUpper()</label>
+                                                        <label>@usuario.NombreApellido.ToUpper()</label>
                                                     }
                                                     else
                                                     {

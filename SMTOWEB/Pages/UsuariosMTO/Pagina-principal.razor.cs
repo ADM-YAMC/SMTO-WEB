@@ -21,19 +21,20 @@ namespace SMTOWEB.Pages.UsuariosMTO
         int inputTarjeta;
         private Root carsd;
         GetCardUser getCard = new GetCardUser();
-        UserTemp user = new UserTemp();
         private TarjetaTemp tarjetas;
         Tarjeta UpdateTarjeta = new Tarjeta();
         private Response response;
         bool loading = false;
+        private UserTemp user;
         protected override async Task OnInitializedAsync()
         {
 
             try
             {
+                user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
                 if (user != null)
                 {
-                    carsd = await getCard.Getcard(5);
+                    carsd = await getCard.Getcard(user.idUsuario);
                     tarjetas = carsd.tarjeta[0];
                 }
             }
@@ -88,23 +89,23 @@ namespace SMTOWEB.Pages.UsuariosMTO
             }
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                try
-                {
-                    var storage = await Js.InvokeAsync<string>("Session");
-                    user = JsonConvert.DeserializeObject<UserTemp>(storage);
-                    StateHasChanged();
-                }
-                catch (Exception)
-                {
+        //protected override async Task OnAfterRenderAsync(bool firstRender)
+        //{
+        //    if (firstRender)
+        //    {
+        //        try
+        //        {
+        //            var storage = await Js.InvokeAsync<string>("Session");
+        //            user = JsonConvert.DeserializeObject<UserTemp>(storage);
+        //            StateHasChanged();
+        //        }
+        //        catch (Exception)
+        //        {
 
-                    Console.WriteLine("Error");
-                }
-            }
-        }
+        //            Console.WriteLine("Error");
+        //        }
+        //    }
+        //}
     }
 
 

@@ -1,0 +1,100 @@
+﻿
+@page "/my-empresa"
+@inject IJSRuntime Js
+@inject HttpClient http
+@inject ISessionStorageService sessionStorage;
+
+
+<style>
+    h1 {
+        display: inline !important;
+    }
+</style>
+
+@if (empresa != null)
+{
+<div class="container-xl">
+    <RadzenCard style="border-left: 3px solid #006797">
+        <h2>@empresa.Nombre</h2>
+    </RadzenCard>
+    <div class="row mb-3 mt-4">
+        <div class="col mb-3">
+            <RadzenCard style="border-left: 3px solid #006797">
+                <h1>@(vendidoEmpresas != null ? vendidoEmpresas.CantidadSucursales:0) <span class="text-danger" style="font-size:20px;"><i class="fas fa-arrow-alt-circle-down"></i></span></h1>
+                <label>Sucursales activas</label>
+            </RadzenCard>
+        </div>
+        <div class="col mb-3">
+            <RadzenCard style="border-left: 3px solid #006797">
+                <h1 class="d-inline mr-2">@(vendidoEmpresas != null ? vendidoEmpresas.Viajes: vendidoEmpresas.Viajes == "" ? "0" : "0") <span class="text-success" style="font-size:20px;"><i class="fas fa-arrow-alt-circle-up"></i></span></h1>
+                <label>Boletos vendidos</label>
+            </RadzenCard>
+        </div>
+        <div class="col mb-3">
+            <RadzenCard style="border-left: 3px solid #006797">
+                <h1 class="d-inline mr-2">@(vendidoEmpresas != null ? vendidoEmpresas.Balance: vendidoEmpresas.Balance == "" ? "0" : "0") <span class="text-success" style="font-size:20px;"><i class="fas fa-arrow-alt-circle-up"></i></span></h1>
+                <label>Balance vendido</label>
+            </RadzenCard>
+        </div>
+        <div class="col mb-3">
+            <RadzenCard style="border-left: 3px solid #006797">
+                <h1 class="d-inline mr-2">
+                    RD$@(vendidoEmpresas != null ? String.Format("{0:n0}",
+                                                 vendidoEmpresas.Total) : vendidoEmpresas.Total == "" ? "0" : "0")
+                    <span class="text-success" style="font-size:20px;"><i class="fas fa-arrow-alt-circle-up"></i></span>
+                </h1>
+                <label>Recaudado hoy</label>
+            </RadzenCard>
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <h2>Sucursales</h2>
+    </div>
+
+    <RadzenCard>
+        <Sucursales_table></Sucursales_table>
+    </RadzenCard>
+</div>
+}
+else
+{
+    <Loading></Loading>
+}
+
+
+
+@code {
+    private UserTemp user;
+    Empresa empresa;
+    VendidoEmpresas vendidoEmpresas;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
+            if (user != null)
+            {
+                empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
+                if (empresa != null)
+                {
+                    var fecha = DateTime.Now;
+                    vendidoEmpresas = await http.GetFromJsonAsync<VendidoEmpresas>
+                        ($"https://localhost:44391/api/Empresas/vendidoEmpresaDia/{empresa.IdEmpresa}/{fecha.Month}/{fecha.Day}");
+                }
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    public class VendidoEmpresas
+    {
+        public string Viajes { get; set; }
+        public string Balance { get; set; }
+        public string Total { get; set; }
+        public int CantidadSucursales { get; set; }
+    }
+}

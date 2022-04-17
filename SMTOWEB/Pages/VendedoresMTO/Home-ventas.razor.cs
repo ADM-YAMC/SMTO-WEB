@@ -33,7 +33,8 @@ namespace SMTOWEB.Pages.VendedoresMTO
         AutoResetEvent _autoEvent = null;
         int conunt = 0;
         CustomUsuarios usuarioTitular;
-        string QRCodeSTR;
+        Usuario usuario;
+        string QRCodeSTR = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png";
         protected override async Task OnInitializedAsync()
         {
 
@@ -62,12 +63,12 @@ namespace SMTOWEB.Pages.VendedoresMTO
                 {
                     if (responseCardFor?.tarjeta?.idUsuarioTitular != 0)
                     {
-                        usuarioTitular = await Http.GetFromJsonAsync<CustomUsuarios>($"https://localhost:44391/api/Usuarios/{responseCardFor.tarjeta.idUsuarioTitular}");
+                        usuario = await Http.GetFromJsonAsync<Usuario>($"https://localhost:44391/api/Usuarios/{responseCardFor.tarjeta.idUsuarioTitular}");
                       
                     }
                     
                 }
-                QR(responseCardFor.tarjeta.numeroTarjeta.ToString());
+                //QR(responseCardFor.tarjeta.numeroTarjeta.ToString());
             }
             else
             {
@@ -85,8 +86,8 @@ namespace SMTOWEB.Pages.VendedoresMTO
                 QRCode qRCode = new QRCode(qRCodeData);
                 using (Bitmap oBit = qRCode.GetGraphic(20))
                 {
-                    oBit.Save(ms, ImageFormat.Png);
-                    QRCodeSTR = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                    oBit.Save(ms, ImageFormat.Jpeg);
+                    QRCodeSTR = "data:image/jpeg;base64," + Convert.ToBase64String(ms.ToArray());
                 }
             }
         }
@@ -139,26 +140,20 @@ namespace SMTOWEB.Pages.VendedoresMTO
             
         }
 
-        //protected override async Task OnAfterRenderAsync(bool firstRender)
-        //{
-        //    HttpClient Http = new HttpClient();
-        //    if (firstRender)
-        //    {
-        //        try
-        //        {
-        //            var storage = await Js.InvokeAsync<string>("Session");
-        //            user = JsonConvert.DeserializeObject<UserTemp>(storage);
-        //           await pGetdataSucursal();
-        //            StateHasChanged();
+        async Task Bloqueo(PGetInfoSucursal sucursal)
+        {
+            string msj = "Esta sucursal a sido bloqueada por las personas que " +
+                "administran la misma. Lamentamos los inconvenientes... Para mas " +
+                "informacion, pongase en contacto con su cental...";
+            if (!sucursal.Estado)
+            {
+                await Js.InvokeAsync<object>
+                    ("Estado", "Oops..", $"{msj}", "info");
+                navigate.NavigateTo("/");
+                await sessionStorage.RemoveItemAsync("usuario");
 
-        //        }
-        //        catch (Exception)
-        //        {
-
-        //            Console.WriteLine("Error");
-        //        }
-        //    }
-        //}
+            }
+        }
         async Task Limpiar()
         {
             StartTimer();
@@ -171,6 +166,8 @@ namespace SMTOWEB.Pages.VendedoresMTO
         {
             pGetInfoSucursal = await Http.GetFromJsonAsync<PGetInfoSucursal>
                        ($"https://localhost:44391/api/Sucursal/info/sucursal/{Convert.ToInt32(user.idSucursal)}");
+
+            await Bloqueo(pGetInfoSucursal);
             
         }
     }

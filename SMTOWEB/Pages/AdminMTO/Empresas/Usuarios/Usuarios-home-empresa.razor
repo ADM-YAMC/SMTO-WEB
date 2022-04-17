@@ -1,0 +1,76 @@
+﻿@page "/empresa/usuarios"
+
+@using Newtonsoft.Json
+@inject HttpClient http
+@inject IJSRuntime Js
+@inject SweetAlertService Swal
+@inject ISessionStorageService sessionStorage;
+<div class="row mb-3">
+    <div class="col">
+        <h2>Usuarios de tu empresas</h2>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <a href="empresa/usuarios/registro-usuarios" class="btn btn-primary">Nuevo usuario</a>
+    </div>
+</div>
+
+<RadzenCard>
+    @if (usuarios != null)
+    {
+        @if (usuarios.Count != 0)
+        {
+            <RadzenDataGrid AllowFiltering="true" @ref="grid"  AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="6"
+                            AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                            Data="@usuarios" TItem="Usuario" ColumnWidth="300px"
+                            LogicalFilterOperator="LogicalFilterOperator.Or">
+                <Columns>
+                    <RadzenDataGridColumn TItem="Usuario" Property="Cedula" Title="Cedula" Width="100px" />
+                    <RadzenDataGridColumn TItem="Usuario" Property="NombreApellido" Title="Nombre" Width="100px" />
+                    <RadzenDataGridColumn TItem="Usuario" Property="Telefono" Title="Telefono" Width="80px" />
+                    <RadzenDataGridColumn TItem="Usuario" Property="Direccion" Title="Direccion" Width="100px" />
+                    <RadzenDataGridColumn TItem="Usuario" Property="NombreUsuario" Title="Correo" Width="100px" />
+                    <RadzenDataGridColumn TItem="Usuario"  Property="Rol" Title="Rol" Width="90px">
+                        <Template Context="data">
+                            @if (data.Rol == "3")
+                            {
+                                @("Vendedor")
+                            }
+                            else
+                            {
+                                @("Usuario")
+                            }
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Usuario" Title="Opciones" Width="70px" Filterable="false">
+                        <Template Context="data">
+                            <div class="col">
+                                <RadzenButton Click="(()=> ConfirmarDesvinculacion(data))" Style="display:inline" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
+                                <RadzenButton Style="display:inline" Icon="edit" ButtonStyle="ButtonStyle.Success" />
+                            </div>
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                No se encontraron datos...
+            </div>
+        }
+    }
+    else
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+</RadzenCard>
+
+@code {
+
+
+
+}

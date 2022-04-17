@@ -1,0 +1,100 @@
+﻿@page "/empresa/{id:int}/sucursales/registro-sucursales"
+@page "/empresa/{id:int}/sucursales/editar-sucursal/{ids:int}"
+
+
+@inject HttpClient http
+@inject IJSRuntime Js
+@inject SweetAlertService Swal
+@inject ISessionStorageService sessionStorage;
+<RadzenCard class="mt-5 ml-1 col-lg-6 m-auto ">
+    <div class="row">
+        <div class="col">
+            <h2>Registro de sucursales</h2>
+        </div>
+    </div>
+    <EditForm Model="@sucursal" OnValidSubmit="PostSucursal">
+        <DataAnnotationsValidator />
+        <div class="border-top mt-3">
+            <div class="form-group">
+                <label class=" mb-1">Nombre socusal</label>
+                <InputText @bind-Value="sucursal.NombreSucursal" class="form-control"></InputText>
+                <ValidationMessage For=@(() => sucursal.NombreSucursal) />
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <label class=" mb-1">Telefono</label>
+            <RadzenMask Mask="(***) ***-****" CharacterPattern="[0-9]" Placeholder="(000) 000-0000" Name="Phone"
+                        @bind-Value="sucursal.Telefono" Style="width: 100%;" />
+            <ValidationMessage For=@(() => sucursal.Telefono) />
+        </div>
+        <div class="form-group">
+            <label>Direccion</label>
+            <InputTextArea @bind-Value="sucursal.Direccion" class="form-control"></InputTextArea>
+            <ValidationMessage For=@(() => sucursal.Direccion) />
+        </div>
+        <button type="submit" class="btn btn-success float-right mt-2">Guardar</button>
+    </EditForm>
+</RadzenCard>
+
+@if (ids != 0)
+{
+    <div class="row mb-3 mt-4">
+        <div class="col">
+            <h2>Usuarios de esta sucursal</h2>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a href="empresa/usuarios/registro-usuarios" class="btn btn-primary">Nuevo usuario</a>
+        </div>
+    </div>
+
+    <RadzenCard class="mb-5">
+        @if (usuarios != null)
+        {
+            @if (usuarios.Count != 0)
+            {
+                <RadzenDataGrid AllowFiltering="true" @ref="grid" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="6"
+                                AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                Data="@usuarios" TItem="Usuario" ColumnWidth="300px"
+                                LogicalFilterOperator="LogicalFilterOperator.Or">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="Usuario" Property="Cedula" Title="Cedula" Width="100px" />
+                        <RadzenDataGridColumn TItem="Usuario" Property="NombreApellido" Title="Nombre" Width="100px" />
+                        <RadzenDataGridColumn TItem="Usuario" Property="Telefono" Title="Telefono" Width="80px" />
+                        <RadzenDataGridColumn TItem="Usuario" Property="Direccion" Title="Direccion" Width="100px" />
+                        <RadzenDataGridColumn TItem="Usuario" Property="NombreUsuario" Title="Correo" Width="100px" />
+                        <RadzenDataGridColumn TItem="Usuario" Property="Rol" Title="Rol" Width="90px">
+                            <Template Context="data">
+                                @if (data.Rol == "3")
+                                {
+                                    @("Vendedor")
+                                }
+                                else
+                                {
+                                    @("Usuario")
+                                }
+                            </Template>
+                        </RadzenDataGridColumn>
+                    </Columns>
+                </RadzenDataGrid>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    No se encontraron datos...
+                </div>
+            }
+        }
+        else
+        {
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }
+    </RadzenCard>
+}
+
+@code {
+
+}

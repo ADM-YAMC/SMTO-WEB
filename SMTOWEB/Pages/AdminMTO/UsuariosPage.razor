@@ -14,8 +14,20 @@
                 <a href="nuevo-usuario" class="btn btn-primary float-right">Nuevo usuario</a>
             </div>
         </div>
-        <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Justify" ShowPagingSummary="true"
-                        Data="@usuarios" @ref="RadzenGrid" TItem="Usuario" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
+        <RadzenDataGrid AllowFiltering="true" 
+                        AllowColumnResize="true" 
+                        FilterMode="FilterMode.Advanced" 
+                        AllowSorting="true" 
+                        PageSize="5" 
+                        AllowPaging="true" 
+                        PagerHorizontalAlign="HorizontalAlign.Justify" 
+                        ShowPagingSummary="true"
+                        Data="@usuarios" 
+                        @ref="RadzenGrid" 
+                        TItem="Usuario" 
+                        ColumnWidth="300px" 
+                        LogicalFilterOperator="LogicalFilterOperator.Or" 
+                        FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
             <Columns>
                 <RadzenDataGridColumn TItem="Usuario" Property="Cedula" Title="Cedula" Width="200px" />
                 <RadzenDataGridColumn TItem="Usuario" Property="NombreApellido" Title="Nombre" Width="140px" />
@@ -24,6 +36,18 @@
                 <RadzenDataGridColumn TItem="Usuario" Property="Rol" Title="Rol" Width="140px">
                     <Template Context="usuario">
                         @if (usuario.Rol == "1")
+                        {
+                            <span>Administrador</span>
+                        }
+                        else if (usuario.Rol == "2")
+                        {
+                            <span>Adm sucursales</span>
+                        }
+                        else if (usuario.Rol == "3")
+                        {
+                            <span>Vendedor</span>
+                        }
+                        else
                         {
                             <span>Usuario</span>
                         }

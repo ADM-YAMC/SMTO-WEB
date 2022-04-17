@@ -78,21 +78,21 @@ overflow:hidden;
                 {
                     <RadzenPanelMenuItem Text="Inicio" Path="administrador" Icon="home"></RadzenPanelMenuItem>
                     <RadzenPanelMenuItem Text="Usuarios" Path="usuarios" Icon="account_circle"></RadzenPanelMenuItem>
-                    <RadzenPanelMenuItem Text="Empresas" Path="fileinput" Icon="attach_file"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Empresas" Path="empresas" Icon="account_balance"></RadzenPanelMenuItem>
                     <RadzenPanelMenuItem Text="Sucursales" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
                     <RadzenPanelMenuItem Text="Configuracion" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
                 }
                 else if (user.rol == "2")
                 {
-                    <RadzenPanelMenuItem Text="Inicio" Path="administrador" Icon="home"></RadzenPanelMenuItem>
-                    <RadzenPanelMenuItem Text="Usuarios" Path="usuarios" Icon="account_circle"></RadzenPanelMenuItem>
-                    <RadzenPanelMenuItem Text="Sucursales" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Inicio" Path="my-empresa" Icon="home"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Usuarios" Path="empresa/usuarios" Icon="account_circle"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Sucursales" Path="empresa/sucursales" Icon="perm_media"></RadzenPanelMenuItem>
                     <RadzenPanelMenuItem Text="Configuracion" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
                 }
                 else if (user.rol == "3")
                 {
-                    <RadzenPanelMenuItem Text="Inicio" Path="smto-kiosko" Icon="home"></RadzenPanelMenuItem>
-                    <RadzenPanelMenuItem Text="Reportes" Path="dialog" Icon="perm_media"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Inicio" Path="smto-kiosco" Icon="home"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="Reportes" Path="kiosco/reportes" Icon="assessment"></RadzenPanelMenuItem>
                     <RadzenPanelMenuItem Text="Configuracion" Path="notification" Icon="announcement"></RadzenPanelMenuItem>
                 }
                 else if (user.rol == "4")

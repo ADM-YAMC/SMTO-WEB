@@ -13,8 +13,15 @@ namespace SMTOWEB.Servicios
         public async Task<List<Usuario>> GetUsuarios()
         {
             HttpClient http = new HttpClient();
-            var usuarios = await http.GetFromJsonAsync<List<Usuario>>("https://localhost:44391/api/Usuarios");
-            return usuarios;
+            var usuarios = await http.GetFromJsonAsync<Root>("https://localhost:44391/api/Usuarios");
+            return usuarios.usuarios;
+        }
+
+        public class Root
+        {
+            public bool ok { get; set; }
+            public string mensaje { get; set; }
+            public List<Usuario> usuarios { get; set; }
         }
     }
 }

@@ -8,8 +8,8 @@ namespace SMTOWEB.Modelo
     public class MetodoPago
     {
         [Required(ErrorMessage = "El numero de la tarjeta  es requerido...")]
-        [MaxLength(16,ErrorMessage ="El numero de la tarjeta es muy largo...")]
-        [MinLength(16,ErrorMessage ="El numero de tarjeta es muy corto...")]
+        [MaxLength(19,ErrorMessage ="El numero de la tarjeta es muy largo...")]
+        [MinLength(19,ErrorMessage ="El numero de tarjeta es muy corto...")]
         public string Numero_tarjeta_pago { get; set; }
         [Required]
         public string Mes { get; set; }

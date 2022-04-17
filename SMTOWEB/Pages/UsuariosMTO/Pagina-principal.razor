@@ -2,6 +2,7 @@
 @page "/pagina-principal"
 @inject IJSRuntime Js
 @inject HttpClient http
+@inject ISessionStorageService sessionStorage;
 <style>
     .nav-link.active {
         border-bottom: 2px solid red !important;
@@ -162,7 +163,7 @@ else
                     </div>
                     @if (tarjeta != null)
                     {
-                       @((MarkupString)tarjeta.mensaje)
+                        @((MarkupString)tarjeta.mensaje)
                     }
                     @if (inputTarjeta > 10)
                     {

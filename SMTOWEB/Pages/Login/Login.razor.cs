@@ -20,7 +20,8 @@ namespace SMTOWEB.Pages.Login
       
         public Root respuesta;
         userDataLogin dataLogin = new userDataLogin();
-        bool loading = false;
+        string roles;
+        bool loading = false, redireccionar = false;
         [Inject]
         SweetAlertService Swal { get; set; }
        private async Task logout()
@@ -35,9 +36,16 @@ namespace SMTOWEB.Pages.Login
                 respuesta = await responses.Content.ReadFromJsonAsync<Root>();
                 if (respuesta.ok)
                 {
-
-                    await Redirecion(respuesta.user[0].rol);
-
+                    if (respuesta.user[0].rol != "4")
+                    {
+                        Rol();
+                        redireccionar = true;
+                        loading = false;
+                    }
+                    else
+                    {
+                       await RedirigirUsuario();
+                    }
                 }
                 else
                 {
@@ -52,6 +60,28 @@ namespace SMTOWEB.Pages.Login
                 loading = false;
             }
         }
+
+        void Rol()
+        {
+            if (respuesta.user[0].rol =="1")
+            {
+                roles = "Administrador";
+            }
+            else if (respuesta.user[0].rol == "2")
+            {
+                roles = "Adm Empresa";
+            }
+            else if (respuesta.user[0].rol == "3")
+            {
+                roles = "Vendedor";
+            }
+            else
+            {
+                roles = "Usuario";
+            }
+
+        }
+
         async Task Redirecion(string rol)
         {
 
@@ -64,12 +94,12 @@ namespace SMTOWEB.Pages.Login
                     break;
                 case "2":
                     await JS.InvokeVoidAsync("storage", respuesta.user[0]);
-                    NavigationManager.NavigateTo("/administrador");
+                    NavigationManager.NavigateTo("/my-empresa");
                     loading = false;
                     break;
                 case "3":
                     await JS.InvokeVoidAsync("storage", respuesta.user[0]);
-                    NavigationManager.NavigateTo("/smto-kiosco");
+                    NavigationManager.NavigateTo("smto-kiosco");
                     loading = false;
                     break;
                 case "4":
@@ -81,8 +111,16 @@ namespace SMTOWEB.Pages.Login
                     break;
             }
         }
+
+        async Task RedirigirUsuario()
+        {
+            await JS.InvokeVoidAsync("storage", respuesta.user[0]);
+            NavigationManager.NavigateTo("/pagina-principal");
+            loading = false;
+        }
     }
     
+   
 
     public class userDataLogin
     {

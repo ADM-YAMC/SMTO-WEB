@@ -15,5 +15,6 @@ namespace SMTOWEB.Modelos
         public string Nombre_Sucursal { get; set; }
         public string Direccion { get; set; }
         public string Telefono { get; set; }
+        public bool Estado { get; set; }
     }
 }

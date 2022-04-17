@@ -22,6 +22,8 @@ namespace SMTOWEB.Pages.global
         CallAlerts alerts = new CallAlerts();
         async Task PostUser()
         {
+            usuario.IdEmpresa = 0;
+            usuario.Estado = true;
             if (user == null){usuario.Rol = "4";}
             var fecha = DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss");
             usuario.FechaCreacion = Convert.ToDateTime(fecha);
@@ -32,12 +34,13 @@ namespace SMTOWEB.Pages.global
             respuesta = await responses.Content.ReadFromJsonAsync<Response>();
                 if (respuesta.ok)
                 {
-                  await alerts.AlertSuccess(Js);
+                await Js.InvokeAsync<object>("Estado", "Exito", $"El usuario a sido creado con exito...", "success");
+                usuario = new Usuario();
                 }
                 else
                 {
-                    await Swal.FireAsync("Oops...", "Ocurrio un error al intentar registar los datos", "error");
-                }
+                await Js.InvokeAsync<object>("Estado", "Oops...", $"Ocurrio un error...", "error");
+            }
                 
         }
 
@@ -48,6 +51,7 @@ namespace SMTOWEB.Pages.global
             {
                 try
                 {
+                    usuario.IdSucursal = 0;
                     var storage = await Js.InvokeAsync<string>("Session");
                     user = JsonConvert.DeserializeObject<UserTemp>(storage);
                     StateHasChanged();

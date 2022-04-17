@@ -285,7 +285,13 @@ else
                     <DataAnnotationsValidator />
                     <div class="form-group">
                         <label>Numero de tarjeta</label>
-                        <InputText @bind-Value="metodoPago.Numero_tarjeta_pago" @oninput="SelectedCarsChanged" maxlength="16" minlength="16" class="form-control"></InputText>
+                        <RadzenMask Mask="**** **** **** ****" CharacterPattern="[0-9]" 
+                                    Placeholder="0000 0000 0000 0000" 
+                                    Name="CardNr" 
+                                    @bind-Value="metodoPago.Numero_tarjeta_pago" 
+                                    Change=@(args => SelectedCarsChanged(args)) 
+                                    Style="width: 100%;" />
+                        @*<InputText @bind-Value="metodoPago.Numero_tarjeta_pago" @oninput="SelectedCarsChanged" maxlength="16" minlength="16" class="form-control"></InputText>*@
                         <ValidationMessage For=@(() => metodoPago.Numero_tarjeta_pago) />
                         @if (!resultado)
                         {

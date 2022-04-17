@@ -1,0 +1,42 @@
+﻿@page "/empresa/sucursales"
+@inject HttpClient http
+@inject IJSRuntime Js
+@inject ISessionStorageService sessionStorage;
+
+
+<div class="row mb-3">
+    <div class="col">
+        <h2>Sucursales</h2>
+    </div>
+    <div class="col d-flex justify-content-end">
+        @if (empresa != null)
+        {
+            <a href="empresa/@empresa.IdEmpresa/sucursales/registro-sucursales" class="btn btn-primary">Nueva sucursal</a>
+        }
+    </div>
+</div>
+
+<RadzenCard>
+    <Sucursales_table></Sucursales_table>
+</RadzenCard>
+
+
+@code {
+    private UserTemp user;
+    Empresa empresa;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
+            if (user != null)
+            {
+                empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+}

@@ -56,65 +56,92 @@
         }
     }
 </style>
-<div class="content0">
-    <div class="content1 text-center">
-        <img class="img-fluid mt-1" src="Image/undraw_creativity_re_8grt.svg" alt="Alternate Text" />
-        <h1 class="smto">SMTO</h1>
-    </div>
-    <div class="content2">
-        <div class="col p-4 content2-content border-left">
-            <div class="col text-center mb-3">
-                <div style="width:100px; height:100px; margin:auto; ">
-                    <img src="Image/train (1).png" class="m-auto" style="z-index:30" height="100" width="100" alt="Alternate Text" />
-                </div>
-                <h1>Iniciar sesión</h1>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button style="background: #0275d8!important;" class="btn btn-primary w-100"><i class="fab fa-facebook-f"></i></button>
-                </div>
-                <div class="col">
-                    <button class="btn btn-light w-100"><i class="fab fa-google"></i></button>
-                </div>
-            </div>
-            <EditForm Model="@dataLogin" OnValidSubmit="logout">
-                <DataAnnotationsValidator />
-                <div class="col mt-3 mb-2">
-                    <div class="form-group">
-                        <h3><i class="fas fa-user"></i> Correo</h3>
-                        <InputText style="height:40px;" type="email" @bind-Value="dataLogin.user" placeholder="Escriba el usuario o correo..." class="form-control" />
-                        <ValidationMessage For=@(() => dataLogin.user) />
+@if (!redireccionar)
+{
+    <div class="content0">
+        <div class="content1 text-center">
+            <img class="img-fluid mt-1" src="Image/undraw_creativity_re_8grt.svg" alt="Alternate Text" />
+            <h1 class="smto">SMTO</h1>
+        </div>
+        <div class="content2">
+            <div class="col p-4 content2-content border-left">
+                <div class="col text-center mb-3">
+                    <div style="width:100px; height:100px; margin:auto; ">
+                        <img src="Image/train (1).png" class="m-auto" style="z-index:30" height="100" width="100" alt="Alternate Text" />
                     </div>
-                    <div class="form-group">
-                        <h3><i class="fas fa-key"></i> Contraseña</h3>
-                        <InputText style="height:40px;" type="password" @bind-Value="dataLogin.pass" placeholder="Escriba la contraseña..." class="form-control" />
-                        <ValidationMessage For=@(() => dataLogin.pass) />
+                    <h1>Iniciar sesión</h1>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button style="background: #0275d8!important;" class="btn btn-primary w-100"><i class="fab fa-facebook-f"></i></button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-light w-100"><i class="fab fa-google"></i></button>
                     </div>
                 </div>
-                <div class="col d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success w-100">Iniciar</button>
-                </div>
+                <EditForm Model="@dataLogin" OnValidSubmit="logout">
+                    <DataAnnotationsValidator />
+                    <div class="col mt-3 mb-2">
+                        <div class="form-group">
+                            <h3><i class="fas fa-user"></i> Correo</h3>
+                            <InputText style="height:40px;" type="email" @bind-Value="dataLogin.user" placeholder="Escriba el usuario o correo..." class="form-control" />
+                            <ValidationMessage For=@(() => dataLogin.user) />
+                        </div>
+                        <div class="form-group">
+                            <h3><i class="fas fa-key"></i> Contraseña</h3>
+                            <InputText style="height:40px;" type="password" @bind-Value="dataLogin.pass" placeholder="Escriba la contraseña..." class="form-control" />
+                            <ValidationMessage For=@(() => dataLogin.pass) />
+                        </div>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success w-100">Iniciar</button>
+                    </div>
 
-            </EditForm>
-            @if (loading)
-            {
-                <Loading></Loading><div style="z-index:-1;" class="col mt-2 ">
-                    <a href="#" class="d-block">Olvide mi contraseña</a>
-                    <label>¿No tienes una cuenta? <a href="/registro">Registrate!</a></label>
-                    <h1 class="smto-re text-center mt-2">SMTO</h1>
-                </div>
-            }
-            else
-            {
-                <div style="z-index:1;" class="col mt-2 ">
-                    <a href="#" class="d-block">Olvide mi contraseña</a>
-                    <label>¿No tienes una cuenta? <a href="/registro">Registrate!</a></label>
-                    <h1 class="smto-re text-center mt-2">SMTO</h1>
-                </div>
-            }
+                </EditForm>
+                @if (loading)
+                {
+                    <Loading></Loading><div style="z-index:-1;" class="col mt-2 ">
+                        <a href="#" class="d-block">Olvide mi contraseña</a>
+                        <label>¿No tienes una cuenta? <a href="/registro">Registrate!</a></label>
+                        <h1 class="smto-re text-center mt-2">SMTO</h1>
+                    </div>
+                }
+                else
+                {
+                    <div style="z-index:1;" class="col mt-2 ">
+                        <a href="#" class="d-block">Olvide mi contraseña</a>
+                        <label>¿No tienes una cuenta? <a href="/registro">Registrate!</a></label>
+                        <h1 class="smto-re text-center mt-2">SMTO</h1>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-</div>
+
+}
+else
+{
+    <br/><br />
+    <RadzenCard class="mt-2 ml-1 mt-5 col-sm-5 m-auto animate__animated animate__backInRight">
+        <div class="col text-center">
+            <h2 class="d-inline mb-1 text-center">¿Como quieres ingresar?</h2>
+            <div style="width:250px; height:270px; margin:auto; ">
+                <img src="Image/undraw_confirmation_re_b6q5.svg" class="m-auto" style="z-index:30" height="270" width="250" alt="Alternate Text" />
+            </div>
+        </div>
+        <div class="alert alert-light" @onclick="(() => RedirigirUsuario())" style="cursor:pointer;">
+            <p><b>Como usuario</b></p>
+        </div>
+        <div class="col alert alert-light" @onclick="(()=> Redirecion(respuesta.user[0].rol))" style="cursor:pointer;">
+            <p><b>Como @roles</b></p>
+        </div>
+        <div class="col alert alert-danger" @onclick="(()=> redireccionar =! redireccionar)" style="cursor:pointer;">
+            <p><b>Cancelar</b></p>
+        </div>
+    </RadzenCard>
+}
+
+
 
 @code {
 
