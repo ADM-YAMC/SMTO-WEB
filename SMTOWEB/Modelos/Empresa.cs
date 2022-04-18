@@ -20,7 +20,7 @@ namespace SMTO_API.Modelos
         [Required(ErrorMessage = "Este campo es requerido...")]
         public string Direccion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public bool? Estado { get; set; }
+        public bool Estado { get; set; }
     }
     public partial class GetEmpresa
     {

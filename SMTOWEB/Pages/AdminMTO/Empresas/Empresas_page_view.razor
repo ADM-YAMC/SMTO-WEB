@@ -10,7 +10,8 @@
             }
         </div>
         <div class="col d-flex justify-content-end">
-            <button class="btn btn-danger" >Bloquear</button>
+            <button @onclick="@(() => OnChange((empresa.Estado==true ? "activar":"desactivar"),empresa))" 
+                    class="btn btn-@(empresa.Estado==true ? "danger":"success")" >@(empresa.Estado==true ? "Bloquear":"Desbloquear")</button>
         </div>
     </div> 
 </RadzenCard>

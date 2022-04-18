@@ -21,7 +21,7 @@ namespace SMTO_API.Modelos
         public int Viajes { get; set; }
         public int Balance { get; set; }
         public DateTime? Fecha { get; set; }
-        public bool? Estado { get; set; }
+        public bool Estado { get; set; }
     }
 
     public class TarjetaTemp

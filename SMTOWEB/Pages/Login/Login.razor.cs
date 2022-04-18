@@ -22,6 +22,7 @@ namespace SMTOWEB.Pages.Login
         userDataLogin dataLogin = new userDataLogin();
         string roles;
         bool loading = false, redireccionar = false;
+        UserTemp userTemp;
         [Inject]
         SweetAlertService Swal { get; set; }
        private async Task logout()
@@ -114,7 +115,9 @@ namespace SMTOWEB.Pages.Login
 
         async Task RedirigirUsuario()
         {
-            await JS.InvokeVoidAsync("storage", respuesta.user[0]);
+            userTemp = respuesta.user[0];
+            userTemp.rol = "4";
+            await JS.InvokeVoidAsync("storage", userTemp);
             NavigationManager.NavigateTo("/pagina-principal");
             loading = false;
         }

@@ -22,14 +22,14 @@
                 <div class="col">
                     <div class="form-group">
                         <label class=" mb-1">RNC</label>
-                        <InputText @bind-Value="empresa.RNC" class="form-control"></InputText>
+                        <RadzenMask Mask="*** *** ***" CharacterPattern="[0-9]" Placeholder="000 000 000" Name="RNC"@bind-Value="empresa.RNC" Style="width: 100%;" />
                         <ValidationMessage For=@(() => empresa.RNC) />
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label class=" mb-1">Telefono</label>
-                        <InputText @bind-Value="empresa.Telefono" class="form-control"></InputText>
+                        <RadzenMask Mask="(***) ***-****" CharacterPattern="[0-9]" Placeholder="(000) 000-0000" Name="Telefono" @bind-Value="empresa.Telefono"  Style="width: 100%;" />
                         <ValidationMessage For=@(() => empresa.Telefono) />
                     </div>
                 </div>
@@ -44,10 +44,10 @@
                                         AllowVirtualization="true" 
                                         class="w-100 form-control"
                                         AllowFiltering="true" 
-                                        Data=@usuarios 
+                                        Data=@usuariosOnlyId 
                                         Placeholder="Seleccione el propietario..." 
-                                        TextProperty="NombreApellido" 
-                                        ValueProperty="IdUsuario"
+                                        TextProperty="name" 
+                                        ValueProperty="id"
                                         Change=@(args => OnChange(args))
                                          />
                         <ValidationMessage For=@(() => empresa.IdUsuario) />
@@ -74,13 +74,13 @@
     Empresa empresa = new Empresa();
     GetUsuariosServices usuariosServices = new();
     List<Usuario> usuarios;
-
+    List<CustomUsuariOnlyId> usuariosOnlyId;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            usuarios = await usuariosServices.GetUsuarios();
+            usuariosOnlyId = await http.GetFromJsonAsync<List<CustomUsuariOnlyId>>("https://localhost:44391/api/Usuarios/CustomUsuariOnlyId");
         }
         catch (Exception)
         {
@@ -126,5 +126,10 @@
         public bool Ok { get; set; }
         public string Mensaje { get; set; }
         public List<Empresa> Empresas { get; set; }
+    }
+    public class CustomUsuariOnlyId
+    {
+        public int id { get; set; }
+        public string name { get; set; }
     }
 }

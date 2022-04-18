@@ -69,6 +69,36 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
             }
         }
 
+        async Task OnChange( string tipo, Empresa empresa)
+        {
+            var result = await Js.InvokeAsync<bool>
+               ("confirmarEliminacion", "Precaucion", $"¿Estas seguro que quieres {tipo} la empresa?", "warning", "Si");
+
+            if (result)
+            {
+                await CambiarEstadoEmpresa(empresa);
+            }
+        
+        }
+
+        async Task CambiarEstadoEmpresa(Empresa empresa)
+        {
+            empresa.Estado =! empresa.Estado;
+            string json = JsonConvert.SerializeObject(empresa);
+            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var responses = await http.PutAsync($"https://localhost:44391/api/Empresas/{IdEmpresa}", httpContent);
+            var respuesta = await responses.Content.ReadFromJsonAsync<CustomEmpresas>();
+            if (respuesta.Ok)
+            {
+                await Js.InvokeAsync<object>
+                    ("Estado", "Exito", $"{(empresa.Estado == true ? "La empresa a sido activada exitosamente..." : "La empresa a sido desactivada exitosamente...")}", "success");
+            }
+            else
+            {
+                await Js.InvokeAsync<object>("Estado", "Oops..", $"{respuesta.Mensaje}", "error");
+            }
+        }
+
         class CustomEmpresas
         {
             public bool Ok { get; set; }

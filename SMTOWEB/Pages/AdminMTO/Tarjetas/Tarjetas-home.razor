@@ -1,0 +1,141 @@
+﻿@page "/tarjetas"
+
+@inject HttpClient http
+@inject IJSRuntime Js
+@inject ISessionStorageService sessionStorage;
+@inject NavigationManager navigate
+
+@if (tarjetas != null)
+{
+    @if (tarjetas.Count != 0)
+    {
+        <RadzenDataGrid AllowFiltering="true" @ref="grid" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="6"
+                        AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                        Data="@tarjetas" TItem="Tarjeta" ColumnWidth="300px"
+                        LogicalFilterOperator="LogicalFilterOperator.Or">
+            <Columns>
+                <RadzenDataGridColumn TItem="Tarjeta" Property="NumeroTarjeta" Title="Numero tarjeta" Width="100px" />
+                <RadzenDataGridColumn TItem="Tarjeta" Property="Viajes" Title="Viajes disponible" Width="95px" />
+                <RadzenDataGridColumn TItem="Tarjeta" Property="Balance" Title="Balance disponible" Width="100px" />
+                <RadzenDataGridColumn TItem="Tarjeta" Property="Estado" Title="Estado" Filterable="false" Width="80px">
+                    <Template Context="data">
+                        <div class="col d-flex justify-content-center">
+                            @if (data.Estado == true)
+                            {
+                                <RadzenBadge BadgeStyle="BadgeStyle.Success" IsPill="true" Text="Activa" />
+                            }
+                            else
+                            {
+                                <RadzenBadge BadgeStyle="BadgeStyle.Danger" IsPill="true" Text="Bloqueada" />
+                            }
+                        </div>
+
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Tarjeta" Property="Estado" Title="Cambio de estado" Filterable="false" Width="100px">
+                    <Template Context="data">
+                        <div class="col d-flex justify-content-center">
+                            <RadzenSwitch @bind-Value=@data.Estado Change=@(args => OnChange(args,(data.Estado==true ? "activar":"desactivar"), data)) />
+
+                        </div>
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Tarjeta" Property="IdUsuario" Filterable="false" Title="Socio" Width="80px">
+                    <Template Context="data">
+                        <div class="col d-flex justify-content-center">
+                            @if (data.IdUsuarioTitular != 0)
+                            {
+                                <RadzenBadge BadgeStyle="BadgeStyle.Success" IsPill="true" Text="Asociada" />
+                            }
+                            else
+                            {
+                                <RadzenBadge BadgeStyle="BadgeStyle.Danger" IsPill="true" Text="Sin asociar" />
+                            }
+                        </div>
+
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Tarjeta" Title="Opciones" Width="70px" Filterable="false">
+                    <Template Context="data">
+                        <div class="col d-flex justify-content-center">
+                            <RadzenButton Style="display:inline; margin-right:4px;" Icon="edit" ButtonStyle="ButtonStyle.Success" />
+                            <RadzenButton Style="display:inline" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
+
+                        </div>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No se encontraron datos...
+        </div>
+    }
+}
+else
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+
+@code {
+
+    List<Tarjeta> tarjetas;
+    RadzenDataGrid<Tarjeta> grid;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await http.GetFromJsonAsync<ResponseCardAdd>($"https://localhost:44391/api/Tarjetas");
+            tarjetas = response.tarjeta;
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    async Task OnChange(bool estado, string tipo, Tarjeta tarjeta)
+    {
+        var result = await Js.InvokeAsync<bool>
+           ("confirmarEliminacion", "Precaucion", $"¿Estas seguro que quieres {tipo} la tarjeta?", "warning", "Si");
+
+        if (result)
+        {
+            await CambiarEstadoTarjeta(tarjeta);
+        }
+        else
+        {
+            tarjeta.Estado = !tarjeta.Estado;
+        }
+    }
+
+    async Task CambiarEstadoTarjeta(Tarjeta tarjeta)
+    {
+        string json = JsonConvert.SerializeObject(tarjeta);
+        StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var responses = await http.PutAsync($"https://localhost:44391/api/Tarjetas/{tarjeta.IdTarjeta}", httpContent);
+        var respuesta = await responses.Content.ReadFromJsonAsync<ResponseCardAdd>();
+        if (respuesta.ok)
+        {
+            await Js.InvokeAsync<object>
+                ("Estado", "Exito", $"{(tarjeta.Estado == true ? "La tarjeta a sido activada exitosamente..." : "La tarjeta a sido desactivada exitosamente...")}", "success");
+        }
+        else
+        {
+            await Js.InvokeAsync<object>("Estado", "Oops..", $"{respuesta.mensaje}", "error");
+        }
+    }
+
+    public class ResponseCardAdd
+    {
+        public bool ok { get; set; }
+        public string? mensaje { get; set; }
+        public List<Tarjeta>? tarjeta { get; set; }
+    }
+}

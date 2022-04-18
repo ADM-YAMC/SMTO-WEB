@@ -3,7 +3,7 @@
 @inject IJSRuntime Js
 @inject HttpClient http
 @inject ISessionStorageService sessionStorage;
-
+@inject NavigationManager navigate
 
 <style>
     h1 {
@@ -78,6 +78,7 @@ else
                 empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
                 if (empresa != null)
                 {
+                    await Bloqueo(empresa);
                     var fecha = DateTime.Now;
                     vendidoEmpresas = await http.GetFromJsonAsync<VendidoEmpresas>
                         ($"https://localhost:44391/api/Empresas/vendidoEmpresaDia/{empresa.IdEmpresa}/{fecha.Month}/{fecha.Day}");
@@ -86,6 +87,20 @@ else
         }
         catch (Exception)
         {
+
+        }
+    }
+
+    async Task Bloqueo(Empresa empresa)
+    {
+        string msj = "Esta empresa ha sido bloqueada, ademas de las sucursales que pertenecen a la misma. Lamentamos los inconvenientes... Para mas " +
+            "informacion, pongase en contacto con su proveedor...";
+        if (!empresa.Estado)
+        {
+            await Js.InvokeAsync<object>
+                ("Estado", "Oops..", $"{msj}", "info");
+            navigate.NavigateTo("/");
+            await sessionStorage.RemoveItemAsync("usuario");
 
         }
     }

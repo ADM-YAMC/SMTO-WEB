@@ -34,8 +34,7 @@ namespace SMTOWEB.Pages.UsuariosMTO
                 user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
                 if (user != null)
                 {
-                    carsd = await getCard.Getcard(user.idUsuario);
-                    tarjetas = carsd.tarjeta[0];
+                    await GetCarduserThis();
                 }
             }
             catch (Exception)
@@ -82,30 +81,19 @@ namespace SMTOWEB.Pages.UsuariosMTO
                 response = await responses.Content.ReadFromJsonAsync<Response>();
                 if (response.ok)
                 {
-                    carsd = await getCard.Getcard(user.idUsuario);
+                    await GetCarduserThis();
+                    StateHasChanged();
                     //tarjetas = (TarjetaTemp)carsd.tarjeta.Reverse<TarjetaTemp>();
                     loading = false;
                 }
             }
         }
 
-        //protected override async Task OnAfterRenderAsync(bool firstRender)
-        //{
-        //    if (firstRender)
-        //    {
-        //        try
-        //        {
-        //            var storage = await Js.InvokeAsync<string>("Session");
-        //            user = JsonConvert.DeserializeObject<UserTemp>(storage);
-        //            StateHasChanged();
-        //        }
-        //        catch (Exception)
-        //        {
-
-        //            Console.WriteLine("Error");
-        //        }
-        //    }
-        //}
+        async Task GetCarduserThis()
+        {
+            carsd = await getCard.Getcard(user.idUsuario);
+            tarjetas = carsd.tarjeta[0];
+        }
     }
 
 
