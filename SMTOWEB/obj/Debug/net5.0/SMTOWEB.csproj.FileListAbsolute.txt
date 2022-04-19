@@ -2112,3 +2112,5 @@ C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\bin\Debug\net5.0\ref\SM
 C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\build-gz\t4wIsZCY.gz
 C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\AdminMTO\Tarjetas\Tarjetas-home.razor.g.cs
 C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\Tarjetas\Tarjetas-home.razor.g.cs
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\RazorDeclaration\Pages\AdminMTO\Recarga_empresa\Recarga_sucursales.razor.g.cs
+C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\obj\Debug\net5.0\Razor\Pages\AdminMTO\Recarga_empresa\Recarga_sucursales.razor.g.cs
