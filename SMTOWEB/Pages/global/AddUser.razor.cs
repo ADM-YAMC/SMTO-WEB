@@ -20,6 +20,13 @@ namespace SMTOWEB.Pages.global
         private Response respuesta;
         private UserTemp user;
         CallAlerts alerts = new CallAlerts();
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            usuario.Rol = "4";
+            usuario.IdSucursal = 0;
+        }
         async Task PostUser()
         {
             usuario.IdEmpresa = 0;
@@ -34,8 +41,13 @@ namespace SMTOWEB.Pages.global
             respuesta = await responses.Content.ReadFromJsonAsync<Response>();
                 if (respuesta.ok)
                 {
-                await Js.InvokeAsync<object>("Estado", "Exito", $"El usuario a sido creado con exito...", "success");
+                if (user == null)
+                {
+                    navigate.NavigateTo("/");
+                }
+                await Js.InvokeAsync<object>("Estado", "Exito", $"El usuario a sido creado con exito... Enviamos una contraseña provicional al correo indicado.", "success");
                 usuario = new Usuario();
+
                 }
                 else
                 {

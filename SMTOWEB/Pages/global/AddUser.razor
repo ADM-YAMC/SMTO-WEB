@@ -3,11 +3,15 @@
 @inject HttpClient Http
 @inject IJSRuntime Js
 @inject SweetAlertService Swal
+@inject NavigationManager navigate 
 <RadzenCard class="mt-5 ml-1 col-lg-6 m-auto ">
     <div class="row">
         <div class="col">
-
-            <h2>@(user != null ? "Nuevo usuario" : "Registrarme")</h2>
+            @if (user == null)
+            {
+                <span @onclick="@(()=> navigate.NavigateTo("/"))" class="mt-2 mr-2 text-primary" style="font-size:20px; cursor:pointer;"><i class="fas fa-arrow-left"></i></span>
+            }
+            <h2 class="d-inline">@(user != null ? "Nuevo usuario" : "Registrarme")</h2>
         </div>
     </div>
     <EditForm Model="@usuario" OnValidSubmit="PostUser">

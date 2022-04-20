@@ -203,11 +203,12 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 86 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\AdminMTO\Tarjetas\Tarjetas-home.razor"
+#line 96 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\AdminMTO\Tarjetas\Tarjetas-home.razor"
        
 
     List<Tarjeta> tarjetas;
     RadzenDataGrid<Tarjeta> grid;
+    public bool loading { get; set; }
     protected override async Task OnInitializedAsync()
     {
         try
@@ -235,20 +236,57 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
             tarjeta.Estado = !tarjeta.Estado;
         }
     }
+    async Task ConfirmarEliminacionCard(Tarjeta tarjeta)
+    {
+        var result = await Js.InvokeAsync<bool>
+           ("confirmarEliminacion", "Precaucion", $"¿Estas seguro que quieres eliminar la tarjeta?", "warning", "Si");
+
+        if (result)
+        {
+            await DeleteCard(tarjeta);
+        }
+
+    }
+
+    async Task DeleteCard(Tarjeta tarjeta)
+    {
+
+        loading = true;
+
+        var delete = await http.DeleteAsync($"https://localhost:44391/api/Tarjetas/{tarjeta.IdTarjeta}");
+        var respuesta = await delete.Content.ReadFromJsonAsync<ResponseCardAdd>();
+        if (respuesta.ok)
+        {
+            tarjetas.Remove(tarjeta);
+            loading = false;
+            await Js.InvokeAsync<object>
+            ("Estado", "Exito", $"{respuesta.mensaje}", "success");
+
+        }
+        else
+        {
+            loading = false;
+            await Js.InvokeAsync<object>("Estado", "Oops..", $"{respuesta.mensaje}", "error");
+        }
+        await grid.Reload();
+    }
 
     async Task CambiarEstadoTarjeta(Tarjeta tarjeta)
     {
+        loading = true;
         string json = JsonConvert.SerializeObject(tarjeta);
         StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
         var responses = await http.PutAsync($"https://localhost:44391/api/Tarjetas/{tarjeta.IdTarjeta}", httpContent);
         var respuesta = await responses.Content.ReadFromJsonAsync<ResponseCardAdd>();
         if (respuesta.ok)
         {
+            loading = false;
             await Js.InvokeAsync<object>
-                ("Estado", "Exito", $"{(tarjeta.Estado == true ? "La tarjeta a sido activada exitosamente..." : "La tarjeta a sido desactivada exitosamente...")}", "success");
+            ("Estado", "Exito", $"{(tarjeta.Estado == true ? "La tarjeta a sido activada exitosamente..." : "La tarjeta a sido desactivada exitosamente...")}", "success");
         }
         else
         {
+            loading = false;
             await Js.InvokeAsync<object>("Estado", "Oops..", $"{respuesta.mensaje}", "error");
         }
     }
