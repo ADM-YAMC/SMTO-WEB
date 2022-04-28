@@ -52,7 +52,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
 
         async Task GetUsuarios()
         {
-            customUsuarios = await http.GetFromJsonAsync<CustomUsuarios>($"https://localhost:44391/api/Usuarios/sucursal/{ids}");
+            customUsuarios = await http.GetFromJsonAsync<CustomUsuarios>($"https://smto-apiv2.azurewebsites.net/api/Usuarios/sucursal/{ids}");
             if (customUsuarios.Ok)
             {
                 usuarios = customUsuarios.Usuarios;
@@ -61,13 +61,13 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
 
         async Task GetSucursal()
         {
-            sucursal = await http.GetFromJsonAsync<Sucursal>($"https://localhost:44391/api/Sucursal/{ids}");
+            sucursal = await http.GetFromJsonAsync<Sucursal>($"https://smto-apiv2.azurewebsites.net/api/Sucursal/{ids}");
         }
 
 
         async Task GetBalanceSucursal()
         {
-            customBalanceSucursales  = await http.GetFromJsonAsync<CustomBalanceSucursales>($"https://localhost:44391/api/BalanceSucursal/{ids}");
+            customBalanceSucursales  = await http.GetFromJsonAsync<CustomBalanceSucursales>($"https://smto-apiv2.azurewebsites.net/api/BalanceSucursal/{ids}");
         }
 
         async Task PostSucursal()
@@ -81,11 +81,11 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
                 sucursal.IdUsuario = user.idUsuario;
                 string json = JsonConvert.SerializeObject(sucursal);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var responses = await http.PostAsync("https://localhost:44391/api/Sucursal", httpContent);
+                var responses = await http.PostAsync("https://smto-apiv2.azurewebsites.net/api/Sucursal", httpContent);
                 var respuesta = await responses.Content.ReadFromJsonAsync<CustomSucursales>();
                 if (respuesta.Ok)
                 {
-                    await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+                    await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
                     sucursal = new Sucursal();
                 }
                 else
@@ -98,11 +98,11 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
                
                 string json = JsonConvert.SerializeObject(sucursal);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var responses = await http.PutAsync($"https://localhost:44391/api/Sucursal/{sucursal.IdSucursal}", httpContent);
+                var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/Sucursal/{sucursal.IdSucursal}", httpContent);
                 var respuesta = await responses.Content.ReadFromJsonAsync<CustomSucursales>();
                 if (respuesta.Ok)
                 {
-                    await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+                    await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
                 }
                 else
                 {
@@ -118,11 +118,11 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
             balanceSucursal.IdUsuario = user.idUsuario;
             string json = JsonConvert.SerializeObject(balanceSucursal);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await http.PostAsync("https://localhost:44391/api/BalanceSucursal", httpContent);
+            var responses = await http.PostAsync("https://smto-apiv2.azurewebsites.net/api/BalanceSucursal", httpContent);
             var respuesta = await responses.Content.ReadFromJsonAsync<CustomBalanceSucursales>();
             if (respuesta.Ok)
             {
-                await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+                await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
                 await GetBalanceSucursal();
                 balanceSucursal = new BalanceSucursal();
             }
@@ -139,11 +139,11 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
             NbalanceSucursal.Balance = balanceSucursal.Balance;
             string json = JsonConvert.SerializeObject(NbalanceSucursal);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await http.PutAsync($"https://localhost:44391/api/BalanceSucursal/{ids}", httpContent);
+            var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/BalanceSucursal/{ids}", httpContent);
             var respuesta = await responses.Content.ReadFromJsonAsync<CustomBalanceSucursales>();
             if (respuesta.Ok)
             {
-                await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+                await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
                 await GetBalanceSucursal();
                 balanceSucursal = new BalanceSucursal();
             }

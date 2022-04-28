@@ -27,7 +27,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
             {
                 loading = true;
                 usuarios = await usuariosServices.GetUsuarios();
-                empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/{IdEmpresa}");
+                empresa = await http.GetFromJsonAsync<Empresa>($"https://smto-apiv2.azurewebsites.net/api/Empresas/{IdEmpresa}");
                 if (empresa.Nombre != null)
                 {
                     await GetTask();
@@ -42,7 +42,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
 
         async Task GetTask()
         {
-            usuario = await http.GetFromJsonAsync<Usuario>($"https://localhost:44391/api/Usuarios/{empresa.IdUsuario}");
+            usuario = await http.GetFromJsonAsync<Usuario>($"https://smto-apiv2.azurewebsites.net/api/Usuarios/{empresa.IdUsuario}");
             if (usuario != null)
             {
                 loading = false;
@@ -54,12 +54,12 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
             loading = true;
             string json = JsonConvert.SerializeObject(empresa);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await http.PutAsync($"https://localhost:44391/api/Empresas/{IdEmpresa}", httpContent);
+            var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/Empresas/{IdEmpresa}", httpContent);
             var respuesta = await responses.Content.ReadFromJsonAsync<CustomEmpresas>();
             if (respuesta.Ok)
             {
                 loading = false;
-                await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+                await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
                 await GetTask();
             }
             else
@@ -72,7 +72,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
         async Task OnChange( string tipo, Empresa empresa)
         {
             var result = await Js.InvokeAsync<bool>
-               ("confirmarEliminacion", "Precaucion", $"¿Estas seguro que quieres {tipo} la empresa?", "warning", "Si");
+               ("confirmarEliminacion", "Precaución", $"¿Estas seguro que quieres {tipo} la empresa?", "warning", "Si");
 
             if (result)
             {
@@ -86,12 +86,12 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
             empresa.Estado =! empresa.Estado;
             string json = JsonConvert.SerializeObject(empresa);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await http.PutAsync($"https://localhost:44391/api/Empresas/{IdEmpresa}", httpContent);
+            var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/Empresas/{IdEmpresa}", httpContent);
             var respuesta = await responses.Content.ReadFromJsonAsync<CustomEmpresas>();
             if (respuesta.Ok)
             {
                 await Js.InvokeAsync<object>
-                    ("Estado", "Exito", $"{(empresa.Estado == true ? "La empresa a sido activada exitosamente..." : "La empresa a sido desactivada exitosamente...")}", "success");
+                    ("Estado", "Éxito", $"{(empresa.Estado == true ? "La empresa a sido activada exitosamente..." : "La empresa a sido desactivada exitosamente...")}", "success");
             }
             else
             {

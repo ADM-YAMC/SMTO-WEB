@@ -44,7 +44,7 @@ namespace SMTOWEB.Modelo
                 HttpClient Http = new HttpClient();
                 string json = JsonConvert.SerializeObject(rescarga);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var responses = await Http.PostAsync("https://localhost:44391/api/Recargas", httpContent);
+                var responses = await Http.PostAsync("https://smto-apiv2.azurewebsites.net/api/Recargas", httpContent);
                 response = await responses.Content.ReadFromJsonAsync<ResponseAddRecargas>();
                 return response;
             }

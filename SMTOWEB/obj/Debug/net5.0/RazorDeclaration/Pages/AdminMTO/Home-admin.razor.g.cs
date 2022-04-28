@@ -231,7 +231,7 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
         if (estado)
         {
             vendidoEmpresas = await http.GetFromJsonAsync<VendidoEmpresas>
-            ($"https://localhost:44391/api/Empresas/TotalVendido/{fecha.Month}");
+            ($"https://smto-apiv2.azurewebsites.net/api/Empresas/TotalVendido/{fecha.Month}");
         }
         else
         {
@@ -244,7 +244,7 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
     {
         var fecha = DateTime.Now;
         vendidoEmpresas = await http.GetFromJsonAsync<VendidoEmpresas>
-             ($"https://localhost:44391/api/Empresas/TotalVendidoDia/{fecha.Month}/{fecha.Day}");
+             ($"https://smto-apiv2.azurewebsites.net/api/Empresas/TotalVendidoDia/{fecha.Month}/{fecha.Day}");
     }
 
 

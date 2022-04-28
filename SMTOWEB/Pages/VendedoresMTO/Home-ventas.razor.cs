@@ -1,15 +1,11 @@
-﻿using Microsoft.JSInterop;
+﻿
+using Microsoft.JSInterop;
+using Net.ConnectCode.BarcodeFontsStandard2D;
 using Newtonsoft.Json;
-using QRCoder;
 using SMTO_API.Modelos;
 using SMTOWEB.Modelo;
 using SMTOWEB.Modelos;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
@@ -19,7 +15,7 @@ namespace SMTOWEB.Pages.VendedoresMTO
 {
     public partial class Home_ventas
     {
-
+        //https://localhost:44391
         Modelo.RecargasTemp recargas = new Modelo.RecargasTemp();
         UserTemp user = new UserTemp();
         private ResponseAddRecargas response;
@@ -34,7 +30,8 @@ namespace SMTOWEB.Pages.VendedoresMTO
         int conunt = 0;
         CustomUsuarios usuarioTitular;
         Usuario usuario;
-        string QRCodeSTR = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png";
+        dynamic f;
+        string QRCodeSTR = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png", qrCodeStr;
         protected override async Task OnInitializedAsync()
         {
 
@@ -46,6 +43,7 @@ namespace SMTOWEB.Pages.VendedoresMTO
                     await pGetdataSucursal();
                     await GetTotalVendidoDia();
                 }
+                
             }
             catch (Exception)
             {
@@ -54,16 +52,18 @@ namespace SMTOWEB.Pages.VendedoresMTO
             }
            
         }
+
+
         async Task GetCardInfo(string args)
         {
             if (args.Length == 9)
             {
-                responseCardFor = await Http.GetFromJsonAsync<ResponseCardForNumber>($"https://localhost:44391/api/Tarjetas/tarjeta/{args}");
+                responseCardFor = await Http.GetFromJsonAsync<ResponseCardForNumber>($"https://smto-apiv2.azurewebsites.net/api/Tarjetas/tarjeta/{args}");
                 if (responseCardFor.ok)
                 {
                     if (responseCardFor?.tarjeta?.idUsuarioTitular != 0)
                     {
-                        usuario = await Http.GetFromJsonAsync<Usuario>($"https://localhost:44391/api/Usuarios/{responseCardFor.tarjeta.idUsuarioTitular}");
+                        usuario = await Http.GetFromJsonAsync<Usuario>($"https://smto-apiv2.azurewebsites.net/api/Usuarios/{responseCardFor.tarjeta.idUsuarioTitular}");
                       
                     }
                     
@@ -77,26 +77,15 @@ namespace SMTOWEB.Pages.VendedoresMTO
 
         }
 
-        void QR(string numeroT)
+        async Task QR()
         {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
-                QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(numeroT, QRCodeGenerator.ECCLevel.Q);
-                QRCode qRCode = new QRCode(qRCodeData);
-                using (Bitmap oBit = qRCode.GetGraphic(20))
-                {
-                    oBit.Save(ms, ImageFormat.Jpeg);
-                    QRCodeSTR = "data:image/jpeg;base64," + Convert.ToBase64String(ms.ToArray());
-                }
-            }
         }
 
         async Task GetTotalVendidoDia()
         {
             var fecha = DateTime.Now.ToString("yyyy-MM-dd");
             totalVenta = await Http.GetFromJsonAsync<TotalVentaDia>
-                      ($"https://localhost:44391/api/Sucursal/info/totalVendido/{user.idSucursal}/{fecha}");
+                      ($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/totalVendido/{user.idSucursal}/{fecha}");
         }
 
         public void StartTimer()
@@ -165,7 +154,7 @@ namespace SMTOWEB.Pages.VendedoresMTO
         async Task pGetdataSucursal()
         {
             pGetInfoSucursal = await Http.GetFromJsonAsync<PGetInfoSucursal>
-                       ($"https://localhost:44391/api/Sucursal/info/sucursal/{Convert.ToInt32(user.idSucursal)}");
+                       ($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/sucursal/{Convert.ToInt32(user.idSucursal)}");
 
             await Bloqueo(pGetInfoSucursal);
             

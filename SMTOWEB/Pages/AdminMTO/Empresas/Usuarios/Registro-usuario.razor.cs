@@ -27,10 +27,10 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
                 user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
                 if (user != null)
                 {
-                    empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
+                    empresa = await http.GetFromJsonAsync<Empresa>($"https://smto-apiv2.azurewebsites.net/api/Empresas/idUsuario/{user.idUsuario}");
                     if (empresa != null)
                     {
-                        sucursales = await http.GetFromJsonAsync<List<Sucursal>>($"https://localhost:44391/api/Sucursal/info/sucursal/empresa/{empresa.IdEmpresa}");
+                        sucursales = await http.GetFromJsonAsync<List<Sucursal>>($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/sucursal/empresa/{empresa.IdEmpresa}");
                     }
                 }
             }
@@ -42,7 +42,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
 
         async Task BuscarPorCedula(string cedula)
         {
-            customUsuarios = await http.GetFromJsonAsync<CustomUsuarios>($"https://localhost:44391/api/Usuarios/cedula/{cedula}");
+            customUsuarios = await http.GetFromJsonAsync<CustomUsuarios>($"https://smto-apiv2.azurewebsites.net/api/Usuarios/cedula/{cedula}");
             if (customUsuarios.Ok)
             {
                 usuario = customUsuarios.Usuarios[0];
@@ -67,11 +67,11 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
                 usuario.IdEmpresa = empresa.IdEmpresa;
                 string json = JsonConvert.SerializeObject(usuario);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var responses = await http.PostAsync("https://localhost:44391/api/Usuarios", httpContent);
+                var responses = await http.PostAsync("https://smto-apiv2.azurewebsites.net/api/Usuarios", httpContent);
                var respuesta = await responses.Content.ReadFromJsonAsync<CustomUsuarios>();
                 if (respuesta.Ok)
                 {
-                    await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+                    await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
                     usuario = new Usuario();
                 }
                 else
@@ -84,11 +84,11 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
                 usuario.IdEmpresa = empresa.IdEmpresa;
                 string json = JsonConvert.SerializeObject(usuario);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var responses = await http.PutAsync($"https://localhost:44391/api/Usuarios/{usuario.IdUsuario}", httpContent);
+                var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/Usuarios/{usuario.IdUsuario}", httpContent);
                 var  respuesta = await responses.Content.ReadFromJsonAsync<CustomUsuarios>();
                 if (respuesta.Ok)
                 {
-                    await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+                    await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
                 }
                 else
                 {

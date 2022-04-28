@@ -43,7 +43,7 @@ namespace SMTOWEB.Pages.VendedoresMTO
             string SP = "SP_Reporte_venta_sucursal_dia";
             var mes = DateTime.Now;
             responseReporteSucursal = await http.GetFromJsonAsync<ResponseReporteSucursalMes>
-                ($"https://localhost:44391/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{mes.Day}/{SP}");
+                ($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{mes.Day}/{SP}");
         }
         async Task getReporteAyer()
         {
@@ -53,7 +53,7 @@ namespace SMTOWEB.Pages.VendedoresMTO
             string SP = "SP_Reporte_venta_sucursal_dia";
             var mes = DateTime.Now;
             responseReporteSucursal = await http.GetFromJsonAsync<ResponseReporteSucursalMes>
-                ($"https://localhost:44391/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{diaAnterior.Day}/{SP}");
+                ($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{diaAnterior.Day}/{SP}");
         }
         async Task getReporteEsteMes()
         {
@@ -62,7 +62,7 @@ namespace SMTOWEB.Pages.VendedoresMTO
             string SP = "SP_Reporte_venta_sucursal_mes";
             var mes = DateTime.Now;
             responseReporteSucursal = await http.GetFromJsonAsync<ResponseReporteSucursalMes>
-                ($"https://localhost:44391/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{mes.Month}/{SP}");
+                ($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{mes.Month}/{SP}");
         }
         async Task getReporteMesPasado()
         {
@@ -71,7 +71,7 @@ namespace SMTOWEB.Pages.VendedoresMTO
             string SP = "SP_Reporte_venta_sucursal_mes";
             var mes = DateTime.Now.AddMonths(-1);
             responseReporteSucursal = await http.GetFromJsonAsync<ResponseReporteSucursalMes>
-                ($"https://localhost:44391/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{mes.Month}/{SP}");
+                ($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/Reporte_venta_sucursal_mes/{user.idSucursal}/{mes.Month}/{SP}");
         }
     }
 }

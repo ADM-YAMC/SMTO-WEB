@@ -37,11 +37,11 @@ namespace SMTOWEB.Pages.VendedoresMTO
             };
             string json = JsonConvert.SerializeObject(tarjeta);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await Http.PostAsync("https://localhost:44391/api/Tarjetas", httpContent);
+            var responses = await Http.PostAsync("https://smto-apiv2.azurewebsites.net/api/Tarjetas", httpContent);
             response = await responses.Content.ReadFromJsonAsync<RootTarjeta>();
             if (response.ok)
             {
-                await JS.InvokeAsync<object>("AlertEvent", "La tarjeta a sido activada con exito...", "success");
+                await JS.InvokeAsync<object>("AlertEvent", "La tarjeta a sido activada con Éxito...", "success");
                 activar = new TActivar();
             }
             else

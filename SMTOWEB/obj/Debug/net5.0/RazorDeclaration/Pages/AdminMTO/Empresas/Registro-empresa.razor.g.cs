@@ -203,7 +203,7 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 73 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\AdminMTO\Empresas\Registro-empresa.razor"
+#line 76 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\AdminMTO\Empresas\Registro-empresa.razor"
        
     Empresa empresa = new Empresa();
     GetUsuariosServices usuariosServices = new();
@@ -214,7 +214,7 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
     {
         try
         {
-            usuariosOnlyId = await http.GetFromJsonAsync<List<CustomUsuariOnlyId>>("https://localhost:44391/api/Usuarios/CustomUsuariOnlyId");
+            usuariosOnlyId = await http.GetFromJsonAsync<List<CustomUsuariOnlyId>>("https://smto-apiv2.azurewebsites.net/api/Usuarios/CustomUsuariOnlyId");
         }
         catch (Exception)
         {
@@ -241,11 +241,11 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
         empresa.Estado = true;
         string json = JsonConvert.SerializeObject(empresa);
         StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        var responses = await http.PostAsync("https://localhost:44391/api/Empresas", httpContent);
+        var responses = await http.PostAsync("https://smto-apiv2.azurewebsites.net/api/Empresas", httpContent);
         var respuesta = await responses.Content.ReadFromJsonAsync<CustomEmpresas>();
         if (respuesta.Ok)
         {
-            await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+            await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
             empresa = new Empresa();
 
         }

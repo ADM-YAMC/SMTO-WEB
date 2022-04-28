@@ -214,7 +214,7 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
             user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
             if (user != null)
             {
-                empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
+                empresa = await http.GetFromJsonAsync<Empresa>($"https://smto-apiv2.azurewebsites.net/api/Empresas/idUsuario/{user.idUsuario}");
             }
         }
         catch (Exception)

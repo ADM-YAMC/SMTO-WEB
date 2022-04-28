@@ -13,7 +13,7 @@ namespace SMTOWEB.Data
         public async Task<Root> Getcard(int id)
         {
             HttpClient http = new HttpClient();
-            var tarjetas = await http.GetFromJsonAsync<Root>($"https://localhost:44391/api/Tarjetas/usuario/{id}");
+            var tarjetas = await http.GetFromJsonAsync<Root>($"https://smto-apiv2.azurewebsites.net/api/Tarjetas/usuario/{id}");
             return tarjetas;
         }
     }

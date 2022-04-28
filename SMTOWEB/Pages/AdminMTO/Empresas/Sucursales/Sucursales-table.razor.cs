@@ -27,7 +27,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
                 user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
                 if (user != null)
                 {
-                    empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
+                    empresa = await http.GetFromJsonAsync<Empresa>($"https://smto-apiv2.azurewebsites.net/api/Empresas/idUsuario/{user.idUsuario}");
                     if (empresa != null)
                     {
                         await GetSucursales();
@@ -43,13 +43,13 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
         async Task GetSucursales()
         {
             sucursals = await http.GetFromJsonAsync<List<Sucursal>>
-                ($"https://localhost:44391/api/Sucursal/info/sucursal/empresa/{empresa.IdEmpresa}");
+                ($"https://smto-apiv2.azurewebsites.net/api/Sucursal/info/sucursal/empresa/{empresa.IdEmpresa}");
         }
 
         async Task ConfirmarEliminacionSucursal(Sucursal sucursal)
         {
             var result = await Js.InvokeAsync<bool>
-                ("confirmarEliminacion", "Precaucion", "¿Estas seguro que quieres eliminar la sucursal?", "warning", "Si");
+                ("confirmarEliminacion", "Precaución", "¿Estas seguro que quieres eliminar la sucursal?", "warning", "Si");
 
             if (result)
             {
@@ -60,7 +60,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
         async Task OnChange(bool? value, string tipo, Sucursal sucursal)
         {
             var result = await Js.InvokeAsync<bool>
-               ("confirmarEliminacion", "Precaucion", $"¿Estas seguro que quieres {tipo} la sucursal?", "warning", "Si");
+               ("confirmarEliminacion", "Precaución", $"¿Estas seguro que quieres {tipo} la sucursal?", "warning", "Si");
 
             if (result)
             {
@@ -76,12 +76,12 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
         {
             string json = JsonConvert.SerializeObject(sucursal);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await http.PutAsync($"https://localhost:44391/api/Sucursal/{sucursal.IdSucursal}", httpContent);
+            var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/Sucursal/{sucursal.IdSucursal}", httpContent);
             var respuesta = await responses.Content.ReadFromJsonAsync<CustomSucursales>();
             if (respuesta.Ok)
             {
                 await Js.InvokeAsync<object>
-                    ("Estado", "Exito", $"{(sucursal.Estado == true ? "La sucursal a sido activada exitosamente..." : "La sucursal a sido desactivada exitosamente...")}", "success");
+                    ("Estado", "Éxito", $"{(sucursal.Estado == true ? "La sucursal a sido activada exitosamente..." : "La sucursal a sido desactivada exitosamente...")}", "success");
             }
             else
             {
@@ -91,12 +91,12 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Sucursales
 
         async Task EliminarSucursal(Sucursal sucursal)
         {
-            var result = await http.DeleteAsync($"https://localhost:44391/api/Sucursal/{sucursal.IdSucursal}");
+            var result = await http.DeleteAsync($"https://smto-apiv2.azurewebsites.net/api/Sucursal/{sucursal.IdSucursal}");
             var response = await result.Content.ReadFromJsonAsync<CustomSucursales>();
             if (response.Ok)
             {
                 sucursals.Remove(sucursal);
-                await Js.InvokeAsync<object>("Estado", "Exito", $"{response.Mensaje}", "success");
+                await Js.InvokeAsync<object>("Estado", "Éxito", $"{response.Mensaje}", "success");
                 await grid.Reload();
             }
             else

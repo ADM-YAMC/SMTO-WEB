@@ -203,7 +203,7 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 259 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\VendedoresMTO\Home-ventas.razor"
+#line 260 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\VendedoresMTO\Home-ventas.razor"
        
     int value = 1;
 

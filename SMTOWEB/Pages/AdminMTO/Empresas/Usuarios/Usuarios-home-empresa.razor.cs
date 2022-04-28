@@ -28,7 +28,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
                 user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
                 if (user != null)
                 {
-                    empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
+                    empresa = await http.GetFromJsonAsync<Empresa>($"https://smto-apiv2.azurewebsites.net/api/Empresas/idUsuario/{user.idUsuario}");
                     if (empresa != null)
                     {
                         await GetUsuarios();
@@ -43,7 +43,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
 
         async Task GetUsuarios()
         {
-            customUsuarios = await http.GetFromJsonAsync<CustomUsuarios>($"https://localhost:44391/api/Usuarios/empresa/{empresa.IdEmpresa}");
+            customUsuarios = await http.GetFromJsonAsync<CustomUsuarios>($"https://smto-apiv2.azurewebsites.net/api/Usuarios/empresa/{empresa.IdEmpresa}");
             if (customUsuarios.Ok)
             {
                 usuarios = customUsuarios.Usuarios;
@@ -54,7 +54,7 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
         async Task ConfirmarDesvinculacion(Usuario usuario)
         {
             var result = await Js.InvokeAsync<bool>
-                ("confirmarEliminacion", "Precaucion", "¿Estas seguro que quieres desvincular a este usuario?", "warning","Si");
+                ("confirmarEliminacion", "Precaución", "¿Estas seguro que quieres desvincular a este usuario?", "warning","Si");
 
             if (result)
             {
@@ -69,11 +69,11 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas.Usuarios
             usuario.Rol = "4";
             string json = JsonConvert.SerializeObject(usuario);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await http.PutAsync($"https://localhost:44391/api/Usuarios/{usuario.IdUsuario}", httpContent);
+            var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/Usuarios/{usuario.IdUsuario}", httpContent);
             var respuesta = await responses.Content.ReadFromJsonAsync<CustomUsuarios>();
             if (respuesta.Ok)
             {
-                await Js.InvokeAsync<object>("Estado", "Exito", $"El usuario a sido desvinculado con exito...", "success");
+                await Js.InvokeAsync<object>("Estado", "Éxito", $"El usuario a sido desvinculado con Éxito...", "success");
                 await GetUsuarios();
                 await grid.Reload();
             }

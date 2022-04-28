@@ -33,7 +33,7 @@ namespace SMTOWEB.Pages.Login
                 HttpClient Http = new HttpClient();
                 string json = JsonConvert.SerializeObject(dataLogin);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var responses = await Http.PostAsync("https://localhost:44391/api/LoginUser", httpContent);
+                var responses = await Http.PostAsync("https://smto-apiv2.azurewebsites.net/api/LoginUser", httpContent);
                 respuesta = await responses.Content.ReadFromJsonAsync<Root>();
                 if (respuesta.ok)
                 {
@@ -55,9 +55,9 @@ namespace SMTOWEB.Pages.Login
                     loading = false;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //await Swal.FireAsync("Oops...", $"{respuesta.mensaje}", "error");
+                Console.WriteLine(e);
                 loading = false;
             }
         }

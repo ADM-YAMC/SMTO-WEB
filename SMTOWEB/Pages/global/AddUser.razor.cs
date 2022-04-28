@@ -37,7 +37,7 @@ namespace SMTOWEB.Pages.global
             usuario.Contraseña = "12345678";
             string json = JsonConvert.SerializeObject(usuario);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var responses = await Http.PostAsync("https://localhost:44391/api/Usuarios", httpContent);
+            var responses = await Http.PostAsync("https://smto-apiv2.azurewebsites.net/api/Usuarios", httpContent);
             respuesta = await responses.Content.ReadFromJsonAsync<Response>();
                 if (respuesta.ok)
                 {
@@ -45,7 +45,7 @@ namespace SMTOWEB.Pages.global
                 {
                     navigate.NavigateTo("/");
                 }
-                await Js.InvokeAsync<object>("Estado", "Exito", $"El usuario a sido creado con exito... Enviamos una contraseña provicional al correo indicado.", "success");
+                await Js.InvokeAsync<object>("Estado", "Éxito", $"El usuario a sido creado con Éxito... Enviamos una contraseña provicional al correo indicado.", "success");
                 usuario = new Usuario();
 
                 }

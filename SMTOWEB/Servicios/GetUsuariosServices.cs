@@ -13,7 +13,7 @@ namespace SMTOWEB.Servicios
         public async Task<List<Usuario>> GetUsuarios()
         {
             HttpClient http = new HttpClient();
-            var usuarios = await http.GetFromJsonAsync<Root>("https://localhost:44391/api/Usuarios");
+            var usuarios = await http.GetFromJsonAsync<Root>("https://smto-apiv2.azurewebsites.net/api/Usuarios");
             return usuarios.usuarios;
         }
 

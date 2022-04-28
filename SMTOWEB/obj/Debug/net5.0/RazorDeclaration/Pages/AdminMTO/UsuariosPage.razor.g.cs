@@ -227,7 +227,7 @@ using Newtonsoft.Json;
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Delete,
-            RequestUri = new Uri($"https://localhost:44391/api/Usuarios/{usuario.IdUsuario}"),
+            RequestUri = new Uri($"https://smto-apiv2.azurewebsites.net/api/Usuarios/{usuario.IdUsuario}"),
             Content = new StringContent("application/json")
         };
 

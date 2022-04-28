@@ -14,7 +14,7 @@ function success() {
 
     Toast.fire({
         icon: 'success',
-        title: 'El usuario se registro con exito!!!'
+        title: 'El usuario se registro con Éxito!!!'
     })
 }
 
@@ -119,8 +119,8 @@ function myfunction(mensaje) {
 
 function RecargaSuccess() {
     Swal.fire({
-        title: '¡Exito!',
-        text: 'La recarga se a depositado con exito...',
+        title: '¡Éxito!',
+        text: 'La recarga se a depositado con Éxito...',
         icon: 'success',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

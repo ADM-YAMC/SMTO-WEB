@@ -16,14 +16,14 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
         RadzenDataGrid<GetEmpresa> Grid;
         protected override async Task OnInitializedAsync()
         {
-            getEmpresas = await http.GetFromJsonAsync<List<GetEmpresa>>("https://localhost:44391/api/Empresas");
+            getEmpresas = await http.GetFromJsonAsync<List<GetEmpresa>>("https://smto-apiv2.azurewebsites.net/api/Empresas");
         }
 
 
         async Task ConfirmacionEliminarEmpresa(GetEmpresa empresa)
         {
             var result = await Js.InvokeAsync<bool>
-                ("confirmarEliminacion", "Precaucion", "¿Estas seguro de que quieres eliminar la empresa?", "warning", "Si, Eliminar");
+                ("confirmarEliminacion", "Precaución", "¿Estas seguro de que quieres eliminar la empresa?", "warning", "Si, Eliminar");
             if (result)
             {
                await EliminarEmpresa(empresa);
@@ -33,12 +33,12 @@ namespace SMTOWEB.Pages.AdminMTO.Empresas
 
         async Task EliminarEmpresa(GetEmpresa empresa)
         {
-            var result = await http.DeleteAsync($"https://localhost:44391/api/Empresas/{empresa.IdEmpresa}");
+            var result = await http.DeleteAsync($"https://smto-apiv2.azurewebsites.net/api/Empresas/{empresa.IdEmpresa}");
             var response = await result.Content.ReadFromJsonAsync<CustomEmpresas>();
             if (response.Ok)
             {
                 getEmpresas.Remove(empresa);
-                await Js.InvokeAsync<object>("Estado", "Exito", $"{response.Mensaje}", "success");
+                await Js.InvokeAsync<object>("Estado", "Éxito", $"{response.Mensaje}", "success");
                 await Grid.Reload();
             }
             else

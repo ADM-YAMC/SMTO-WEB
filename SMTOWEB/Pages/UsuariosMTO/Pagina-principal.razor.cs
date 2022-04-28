@@ -49,7 +49,7 @@ namespace SMTOWEB.Pages.UsuariosMTO
             inputTarjeta = args.Value.ToString().Length;
             if (inputTarjeta == 9)
             {
-                tarjeta = await http.GetFromJsonAsync<RootTarjeta>($"https://localhost:44391/api/Tarjetas/asociar/{args.Value}");
+                tarjeta = await http.GetFromJsonAsync<RootTarjeta>($"https://smto-apiv2.azurewebsites.net/api/Tarjetas/asociar/{args.Value}");
             }
         }
 
@@ -77,7 +77,7 @@ namespace SMTOWEB.Pages.UsuariosMTO
 
                 string json = JsonConvert.SerializeObject(UpdateTarjeta);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var responses = await http.PutAsync($"https://localhost:44391/api/Tarjetas/{UpdateTarjeta.IdTarjeta}", httpContent);
+                var responses = await http.PutAsync($"https://smto-apiv2.azurewebsites.net/api/Tarjetas/{UpdateTarjeta.IdTarjeta}", httpContent);
                 response = await responses.Content.ReadFromJsonAsync<Response>();
                 if (response.ok)
                 {

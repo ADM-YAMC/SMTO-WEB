@@ -26,6 +26,15 @@
           "lib/net5.0/Blazored.SessionStorage.dll": {}
         }
       },
+      "BouncyCastle/1.8.9": {
+        "type": "package",
+        "compile": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "CurrieTechnologies.Razor.SweetAlert2/5.2.1": {
         "type": "package",
         "dependencies": {
@@ -43,6 +52,18 @@
         },
         "buildMultiTargeting": {
           "buildMultiTargeting/CurrieTechnologies.Razor.SweetAlert2.props": {}
+        }
+      },
+      "iTextSharp/5.5.13.3": {
+        "type": "package",
+        "dependencies": {
+          "BouncyCastle": "1.8.9"
+        },
+        "compile": {
+          "lib/itextsharp.dll": {}
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {}
         }
       },
       "LibSassBuilder/2.0.1": {
@@ -386,6 +407,15 @@
           }
         }
       },
+      "NETStandardQRCode/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NETStandardQRCode.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NETStandardQRCode.dll": {}
+        }
+      },
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
@@ -393,6 +423,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "QrCode.Net/0.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Gma.QrCodeNet.Encoding.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Gma.QrCodeNet.Encoding.dll": {}
         }
       },
       "QRCoderNetCore/1.0.0": {
@@ -505,6 +544,15 @@
           "lib/net5.0/Blazored.SessionStorage.dll": {}
         }
       },
+      "BouncyCastle/1.8.9": {
+        "type": "package",
+        "compile": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "CurrieTechnologies.Razor.SweetAlert2/5.2.1": {
         "type": "package",
         "dependencies": {
@@ -522,6 +570,18 @@
         },
         "buildMultiTargeting": {
           "buildMultiTargeting/CurrieTechnologies.Razor.SweetAlert2.props": {}
+        }
+      },
+      "iTextSharp/5.5.13.3": {
+        "type": "package",
+        "dependencies": {
+          "BouncyCastle": "1.8.9"
+        },
+        "compile": {
+          "lib/itextsharp.dll": {}
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {}
         }
       },
       "LibSassBuilder/2.0.1": {
@@ -859,6 +919,15 @@
           "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {}
         }
       },
+      "NETStandardQRCode/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NETStandardQRCode.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NETStandardQRCode.dll": {}
+        }
+      },
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
@@ -866,6 +935,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "QrCode.Net/0.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Gma.QrCodeNet.Encoding.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Gma.QrCodeNet.Encoding.dll": {}
         }
       },
       "QRCoderNetCore/1.0.0": {
@@ -974,6 +1052,19 @@
         "lib/netstandard2.1/Blazored.SessionStorage.dll"
       ]
     },
+    "BouncyCastle/1.8.9": {
+      "sha512": "axnBgvdD5n+FnEG6efk/tfKuMFru7R/EoISH9zjh319yb3HD24TEHSAbNN/lTRT2ulOGRxDgOsCjkuk08iwWPg==",
+      "type": "package",
+      "path": "bouncycastle/1.8.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "bouncycastle.1.8.9.nupkg.sha512",
+        "bouncycastle.nuspec",
+        "lib/BouncyCastle.Crypto.dll"
+      ]
+    },
     "CurrieTechnologies.Razor.SweetAlert2/5.2.1": {
       "sha512": "REbLxClBvC++Z4w4v6brPXEOc2872wMAxE2/NB7QU7xIOyqoMYhf5qrpHKQKTSysHVPNwodJY30Y/ibKWv16Bg==",
       "type": "package",
@@ -1027,6 +1118,22 @@
         "staticwebassets/wordpressAdminTheme.js",
         "staticwebassets/wordpressAdminTheme.min.css",
         "staticwebassets/wordpressAdminTheme.min.js"
+      ]
+    },
+    "iTextSharp/5.5.13.3": {
+      "sha512": "vtnMhTEJdZFCkLqaQLjD8aqTBIVKHPrSFuSXnxbLEJlvE/j/l88fvG9wtsejXTmhtErMo0lA9T2LdfdfbwplYw==",
+      "type": "package",
+      "path": "itextsharp/5.5.13.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itextsharp.5.5.13.3.nupkg.sha512",
+        "itextsharp.nuspec",
+        "lib/iTextSharp.xml",
+        "lib/itextsharp.dll",
+        "notice.txt"
       ]
     },
     "LibSassBuilder/2.0.1": {
@@ -1653,6 +1760,18 @@
         "version.txt"
       ]
     },
+    "NETStandardQRCode/1.0.2": {
+      "sha512": "4FEY4HMBn7mRZOsj1lIvLMu65bRIFFM85YXxdi3ZIcq0PYu/wZvCIoot/u5umB3MlQPUXt+jV+ffyWCBiTWlTQ==",
+      "type": "package",
+      "path": "netstandardqrcode/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NETStandardQRCode.dll",
+        "netstandardqrcode.1.0.2.nupkg.sha512",
+        "netstandardqrcode.nuspec"
+      ]
+    },
     "Newtonsoft.Json/13.0.1": {
       "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "type": "package",
@@ -1678,6 +1797,35 @@
         "newtonsoft.json.13.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "QrCode.Net/0.4.0": {
+      "sha512": "/IGAS08L3o0GYsVU1VQnE23w00EVaQ1GP5cS2uEfGsiszZ2X6AnbHImwXL1XPM0opT0GOVgbX4Bhp/7eB22Ugg==",
+      "type": "package",
+      "path": "qrcode.net/0.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NuGet.exe",
+        "lib/net35/Gma.QrCodeNet.Encoding.dll",
+        "lib/net35/Gma.QrCodeNet.Encoding.pdb",
+        "lib/net35/Gma.QrCodeNet.Encoding.xml",
+        "lib/net40/Gma.QrCodeNet.Encoding.XML",
+        "lib/net40/Gma.QrCodeNet.Encoding.dll",
+        "lib/net40/Gma.QrCodeNet.Encoding.pdb",
+        "lib/net45/Gma.QrCodeNet.Encoding.dll",
+        "lib/net45/Gma.QrCodeNet.Encoding.pdb",
+        "lib/net45/Gma.QrCodeNet.Encoding.xml",
+        "lib/netcore45/Gma.QrCodeNet.Encoding.dll",
+        "lib/netcore45/Gma.QrCodeNet.Encoding.pdb",
+        "lib/netcore45/Gma.QrCodeNet.Encoding.pri",
+        "lib/netcore45/Gma.QrCodeNet.Encoding.xml",
+        "lib/netcore45/Themes/Generic.xaml",
+        "lib/sl5/Gma.QrCodeNet.Encoding.dll",
+        "lib/sl5/Gma.QrCodeNet.Encoding.pdb",
+        "lib/sl5/Gma.QrCodeNet.Encoding.xml",
+        "qrcode.net.0.4.0.nupkg.sha512",
+        "qrcode.net.nuspec"
       ]
     },
     "QRCoderNetCore/1.0.0": {
@@ -1872,10 +2020,13 @@
       "Microsoft.AspNetCore.Components.Authorization >= 5.0.15",
       "Microsoft.AspNetCore.Components.WebAssembly >= 5.0.13",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 5.0.13",
+      "NETStandardQRCode >= 1.0.2",
       "Newtonsoft.Json >= 13.0.1",
       "QRCoderNetCore >= 1.0.0",
+      "QrCode.Net >= 0.4.0",
       "Radzen.Blazor >= 3.15.3",
-      "System.Net.Http.Json >= 5.0.0"
+      "System.Net.Http.Json >= 5.0.0",
+      "iTextSharp >= 5.5.13.3"
     ]
   },
   "packageFolders": {
@@ -1886,11 +2037,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yunior.moreta.G4S\\Source\\Repos\\SMTO-WEB\\SMTOWEB\\SMTOWEB.csproj",
+      "projectUniqueName": "C:\\Users\\yunior.moreta.G4S\\source\\repos\\SMTO-WEB\\SMTOWEB\\SMTOWEB.csproj",
       "projectName": "SMTOWEB",
-      "projectPath": "C:\\Users\\yunior.moreta.G4S\\Source\\Repos\\SMTO-WEB\\SMTOWEB\\SMTOWEB.csproj",
+      "projectPath": "C:\\Users\\yunior.moreta.G4S\\source\\repos\\SMTO-WEB\\SMTOWEB\\SMTOWEB.csproj",
       "packagesPath": "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yunior.moreta.G4S\\Source\\Repos\\SMTO-WEB\\SMTOWEB\\obj\\",
+      "outputPath": "C:\\Users\\yunior.moreta.G4S\\source\\repos\\SMTO-WEB\\SMTOWEB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -1907,8 +2058,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.telerik.com/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
@@ -1951,6 +2101,10 @@
             "target": "Package",
             "version": "[5.0.13, )"
           },
+          "NETStandardQRCode": {
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
@@ -1959,6 +2113,10 @@
             "target": "Package",
             "version": "[1.0.0, )"
           },
+          "QrCode.Net": {
+            "target": "Package",
+            "version": "[0.4.0, )"
+          },
           "Radzen.Blazor": {
             "target": "Package",
             "version": "[3.15.3, )"
@@ -1966,6 +2124,10 @@
           "System.Net.Http.Json": {
             "target": "Package",
             "version": "[5.0.0, )"
+          },
+          "iTextSharp": {
+            "target": "Package",
+            "version": "[5.5.13.3, )"
           }
         },
         "imports": [
@@ -1981,7 +2143,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Runtime.browser-wasm",
-            "version": "[5.0.15, 5.0.15]"
+            "version": "[5.0.16, 5.0.16]"
           }
         ],
         "frameworkReferences": {
@@ -1989,7 +2151,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
@@ -1997,5 +2159,37 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"BouncyCastle 1.8.9\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "BouncyCastle",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"iTextSharp 5.5.13.3\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"QrCode.Net 0.4.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "QrCode.Net",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

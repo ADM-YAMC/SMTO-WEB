@@ -205,6 +205,11 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
 #nullable restore
 #line 67 "C:\Users\yunior.moreta.G4S\source\repos\SMTO-WEB\SMTOWEB\Pages\AdminMTO\Empresas\Home-empresa.razor"
        
+
+
+    //https://localhost:44391
+
+
     private UserTemp user;
     Empresa empresa;
     VendidoEmpresas vendidoEmpresas;
@@ -215,13 +220,13 @@ using SMTOWEB.Pages.AdminMTO.Empresas.Sucursales;
             user = await sessionStorage.GetItemAsync<UserTemp>("usuario");
             if (user != null)
             {
-                empresa = await http.GetFromJsonAsync<Empresa>($"https://localhost:44391/api/Empresas/idUsuario/{user.idUsuario}");
+                empresa = await http.GetFromJsonAsync<Empresa>($"https://smto-apiv2.azurewebsites.net/api/Empresas/idUsuario/{user.idUsuario}");
                 if (empresa != null)
                 {
                     await Bloqueo(empresa);
                     var fecha = DateTime.Now;
                     vendidoEmpresas = await http.GetFromJsonAsync<VendidoEmpresas>
-                        ($"https://localhost:44391/api/Empresas/vendidoEmpresaDia/{empresa.IdEmpresa}/{fecha.Month}/{fecha.Day}");
+                        ($"https://smto-apiv2.azurewebsites.net/api/Empresas/vendidoEmpresaDia/{empresa.IdEmpresa}/{fecha.Month}/{fecha.Day}");
                 }
             }
         }

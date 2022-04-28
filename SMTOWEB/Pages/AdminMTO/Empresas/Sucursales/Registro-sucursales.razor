@@ -9,7 +9,7 @@
 
 <div class="container-xl pl-3">
     <div class="row">
-        <div class="col">
+        <div class="col@(ids==0 ? "-5 m-auto":"") ">
             <RadzenCard class="mt-5 ml-1 ">
                 <div class="row">
                     <div class="col">
@@ -40,7 +40,7 @@
                 </EditForm>
             </RadzenCard>
         </div>
-        <div class="col">
+        <div hidden="@(ids==0)" class="col">
             <div class="col mr-0 pr-0">
                 <RadzenCard class="mt-5 ml-1 ">
                     <div class="row">

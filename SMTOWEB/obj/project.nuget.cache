@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "hHUGJyOYNoaaQ6E3kNM0xKE32vhEi9pwbtsAwT4etghGPW89ebcyZFlYpEu0PXmQ6qKss80algBtQmI7lCQB9w==",
+  "dgSpecHash": "cEE8qtDNVXwIegZS6pQRF5jR3lGp1NACCi1Pm6XVWurGkld+2yo4SCLA8Z1iosAPpdAX7W9iYHWRHTIvzCH7VA==",
   "success": true,
   "projectFilePath": "C:\\Users\\yunior.moreta.G4S\\source\\repos\\SMTO-WEB\\SMTOWEB\\SMTOWEB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\blazored.localstorage\\4.2.0\\blazored.localstorage.4.2.0.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\blazored.sessionstorage\\2.2.0\\blazored.sessionstorage.2.2.0.nupkg.sha512",
+    "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\currietechnologies.razor.sweetalert2\\5.2.1\\currietechnologies.razor.sweetalert2.5.2.1.nupkg.sha512",
+    "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\itextsharp\\5.5.13.3\\itextsharp.5.5.13.3.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\libsassbuilder\\2.0.1\\libsassbuilder.2.0.1.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.15\\microsoft.aspnetcore.authorization.5.0.15.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.15\\microsoft.aspnetcore.components.5.0.15.nupkg.sha512",
@@ -36,14 +38,47 @@
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\microsoft.jsinterop.webassembly\\5.0.13\\microsoft.jsinterop.webassembly.5.0.13.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\microsoft.win32.systemevents\\4.5.0\\microsoft.win32.systemevents.4.5.0.nupkg.sha512",
+    "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\netstandardqrcode\\1.0.2\\netstandardqrcode.1.0.2.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\qrcode.net\\0.4.0\\qrcode.net.0.4.0.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\qrcodernetcore\\1.0.0\\qrcodernetcore.1.0.0.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\radzen.blazor\\3.15.3\\radzen.blazor.3.15.3.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\system.drawing.common\\4.5.1\\system.drawing.common.4.5.1.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\system.linq.dynamic.core\\1.2.12\\system.linq.dynamic.core.1.2.12.nupkg.sha512",
     "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
-    "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.15\\microsoft.netcore.app.runtime.browser-wasm.5.0.15.nupkg.sha512"
+    "C:\\Users\\yunior.moreta.G4S\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.16\\microsoft.netcore.app.runtime.browser-wasm.5.0.16.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"BouncyCastle 1.8.9\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "BouncyCastle",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"iTextSharp 5.5.13.3\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"QrCode.Net 0.4.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "QrCode.Net",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

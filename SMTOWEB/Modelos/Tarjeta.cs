@@ -39,6 +39,7 @@ namespace SMTO_API.Modelos
     public class ResponseCardForNumber
     {
         public bool ok { get; set; }
+        public string QR { get; set; }
         public TarjetaTemp? tarjeta { get; set; }
     }
 

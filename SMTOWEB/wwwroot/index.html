@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>SMTO-WEB</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -47,8 +48,9 @@
     <script src="Js/validacion_tarjeta.js"></script>
     <script src="Js/Alerts.js"></script>
     <script src="Js/sessionStorage.js"></script>
+    <script src="https://unpkg.com/qrious@4.0.2/dist/qrious.js"></script>
     <script>
-
+       
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
             document.getElementById("main").style.marginLeft = "250px";

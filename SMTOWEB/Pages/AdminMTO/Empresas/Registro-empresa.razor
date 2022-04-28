@@ -22,7 +22,10 @@
                 <div class="col">
                     <div class="form-group">
                         <label class=" mb-1">RNC</label>
-                        <RadzenMask Mask="*** *** ***" CharacterPattern="[0-9]" Placeholder="000 000 000" Name="RNC"@bind-Value="empresa.RNC" Style="width: 100%;" />
+                        <RadzenMask 
+                        Mask="*** *** ***" 
+                        CharacterPattern="[0-9]" 
+                        Placeholder="000 000 000" Name="RNC"@bind-Value="empresa.RNC" Style="width: 100%;" />
                         <ValidationMessage For=@(() => empresa.RNC) />
                     </div>
                 </div>
@@ -80,7 +83,7 @@
     {
         try
         {
-            usuariosOnlyId = await http.GetFromJsonAsync<List<CustomUsuariOnlyId>>("https://localhost:44391/api/Usuarios/CustomUsuariOnlyId");
+            usuariosOnlyId = await http.GetFromJsonAsync<List<CustomUsuariOnlyId>>("https://smto-apiv2.azurewebsites.net/api/Usuarios/CustomUsuariOnlyId");
         }
         catch (Exception)
         {
@@ -107,11 +110,11 @@
         empresa.Estado = true;
         string json = JsonConvert.SerializeObject(empresa);
         StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-        var responses = await http.PostAsync("https://localhost:44391/api/Empresas", httpContent);
+        var responses = await http.PostAsync("https://smto-apiv2.azurewebsites.net/api/Empresas", httpContent);
         var respuesta = await responses.Content.ReadFromJsonAsync<CustomEmpresas>();
         if (respuesta.Ok)
         {
-            await Js.InvokeAsync<object>("Estado", "Exito", $"{respuesta.Mensaje}", "success");
+            await Js.InvokeAsync<object>("Estado", "Éxito", $"{respuesta.Mensaje}", "success");
             empresa = new Empresa();
 
         }
